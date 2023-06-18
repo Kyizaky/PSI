@@ -12,10 +12,19 @@ if(isset($_REQUEST['email']) && isset($_REQUEST['pass'])){
 		$data=mysqli_fetch_assoc($qr);
 		$_SESSION['user_data']=$data;
 		if($data['role']==1){
-			header("Location:admin.php");	
+			$_SESSION['role']== 1;
+			header("Location:admin.php");
+				
 		}
-		else{
+		elseif($data['role']==2){
+			$_SESSION['roles']== 2;
 			header("Location:pegawai.php");
+				
+		}
+		else {
+			$_SESSION['roles']== 3;	
+			header("Location: pelanggan.php");
+			
 		}
 
 	}
