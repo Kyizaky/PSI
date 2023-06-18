@@ -1,6 +1,9 @@
 <?php
     session_start();
 	include "conn.php";
+    if( ! $_SESSION == 3){
+        header("Location: tampilan_login.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,15 +29,15 @@
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
-				<a href="#">
+				<a href="pelanggan.php">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a href="persediaan.php">
+				<a href="reservasi.php">
 					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">Persediaan</span>
+					<span class="text">Reservasi</span>
 				</a>
 			</li>
 			<li>
@@ -136,14 +139,22 @@
 				</li>
 			</ul>
 
-
-
+<!-- tengah tengah  -->
+			<div class="table-data">
+				<div class="order">
+					
 
 
 
 
 </div>
-				
+<!-- tengah tengah  -->
+				<div class="todo">
+					<div class="head">
+						
+					</div>
+					
+				</div>
 			</div>
 		</main>
 		<!-- MAIN -->

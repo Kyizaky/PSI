@@ -41,10 +41,14 @@ if(isset($_SESSION['user_data'])){
 		        <label for="inputPassword" class="sr-only">Password</label>
 		        <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required>
 		    </div>
-		    <div class="form-group">
+		    <div >
 		        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
-		    </div>
+			</div>	
+				
+		    
 	      </form>
+		  	<a href="daftar.php"><button class="btn btn-lg btn-danger btn-block" >sign up</button></a>
+			
 		</div>
 	    <div class="col-lg-4">
    		</div>
