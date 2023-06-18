@@ -79,14 +79,7 @@
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form>
+			
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
 			<a href="#" class="notification">
@@ -106,7 +99,7 @@
 					<h1>Dashboard</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="admin.php">Dashboard</a>
+							<a href="pelanggan.php">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
@@ -114,12 +107,7 @@
 						</li>
 					</ul>
 				</div>
-				<a href="#" class="btn-download">
-					<i class='bx bxs-cloud-download' ></i>
-					<span class="text">Download PDF</span>
-				</a>
 			</div>
-
 			<ul class="box-info">
 				<li>
 					<i class='bx bxs-calendar-check' ></i>
@@ -149,101 +137,13 @@
 			</ul>
 
 
-			<div class="table-data">
-				<div class="order">
-					<div class="head">
-						<h3>Recent Orders</h3>
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
-					<?php
 
 
-//Cek apakah ada kiriman form dari method post
-if (isset($_GET['id_pesanan'])) {
-	$id_pesanan=htmlspecialchars($_GET["id_pesanan"]);
 
 
-	//Kondisi apakah berhasil atau tidak
-
-	}
-?>
-
-
- <tr class="table-danger">
-		<br>
-	<thead>
-	<tr>
-   <table class="my-3 table table-bordered">
-		<tr class="table-primary">           
-		<th>No</th>
-		<th>Nama</th>
-		<th>Tanggal</th>
-		<th>Waktu</th>
-		<th>Barber</th>
-		<th>Service</th>
-		<th colspan='2'>Keterangan</th>
-
-	</tr>
-	</thead>
-
-	<?php
-	$sql="select * from pesanan order by id_pesanan";
-
-	$hasil=mysqli_query($kon,$sql);
-	$no=0;
-	while ($data = mysqli_fetch_array($hasil)) {
-		$no++;
-
-		?>
-		<tbody>
-		<tr>
-			<td><?php echo $no;?></td>
-			<td><?php echo $data["nama"]; ?></td>
-			<td><?php echo $data["tanggal"];   ?></td>
-			<td><?php echo $data["waktu"];   ?></td>
-			<td><?php echo $data["barber"];   ?></td>
-			<td><?php echo $data["service"];   ?></td>
-			<td><?php echo $data["Status"];   ?></td>
-			<td>
-			</td>
-		</tr>
-		</tbody>
-		<?php
-	}
-	?>
-</table>
 
 </div>
-				<div class="todo">
-					<div class="head">
-						<h3>Todos</h3>
-						<i class='bx bx-plus' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
-					<ul class="todo-list">
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="not-completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="not-completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-					</ul>
-				</div>
+				
 			</div>
 		</main>
 		<!-- MAIN -->
