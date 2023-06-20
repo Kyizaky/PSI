@@ -162,16 +162,9 @@
         
         <div class="form-group">
             <label>Tanggal:</label>
-            <input type="date" name="tanggal" class="form-control" required/>
+            <input type="date"  max="<?php echo date('Y-m-d', strtotime(date('Y-m-d').'+ 7 days'))?>" min="<?php echo date('Y-m-d', strtotime(date('Y-m-d').'+ 1 days'))?>" name="tanggal" class="form-control" required/>
         </div>
-       <div class="form-group">
-            <label>Jam :</label><br>
-            <input type="Radio" name="waktu" value="08:00" required/> 08:00 | 
-            <input type="Radio" name="waktu" value="10:00" required/> 10:00 | 
-            <input type="Radio" name="waktu" value="13:00" required/> 13:00 | 
-        </div>
-                </p>
-        <div class="form-group">
+		<div class="form-group">
             <label>Barber:</label>
             <select name="barber" id="#" class="form-control">
             <option>-- Pilih Barber --</option>
@@ -182,7 +175,18 @@
                 <option value="<?php echo $c['nama']?>"><?php echo $c['nama']?></option>
                 <?php } ?>
 			</select>
+    	</div>
+       	<div class="form-group">
+            <label>Jam :</label><br>
+            <input type="Radio" name="waktu" value="08:00" required/> 08:00 | 
+            <input type="Radio" name="waktu" value="10:00" required/> 10:00 | 
+            <input type="Radio" name="waktu" value="13:00" required/> 13:00 |
+			<input type="Radio" name="waktu" value="13:00" required/> 15:00 |
+			<input type="Radio" name="waktu" value="13:00" required/> 17:00 | 
+			<input type="Radio" name="waktu" value="13:00" required/> 19:00 | 
         </div>
+                </p>
+       
         <div class="form-group">
             <label>Service:</label>
             <select name="service" id="#" class="form-control">
