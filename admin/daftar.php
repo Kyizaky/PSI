@@ -24,11 +24,11 @@
         $email=input($_POST["email"]);
         $pass=md5(input($_POST["pass"]));
         $no_hp=input($_POST["no_hp"]);
-        $roles = 3;
+        $role = 3;
 
         //Query input menginput data kedalam tabel anggota
-        $sql="insert into users (nama,email,pass,no_hp,roles) values
-		('$nama','$email','$pass','$no_hp','$roles')";
+        $sql="insert into users (nama,email,pass,no_hp,role) values
+		('$nama','$email','$pass','$no_hp','$role')";
 
         //Mengeksekusi/menjalankan query diatas
         $hasil=mysqli_query($kon,$sql);
@@ -58,16 +58,13 @@
         </div>
         <div class="form-group">
             <label>Nomor Handphone:</label>
-            <input type="text" name="nama" class="form-control" placeholder="Masukan Nama" required />
+            <input type="text" name="no_hp" class="form-control" placeholder="Masukan nomor Handphone" required />
         </div>
         <div class="form-group">
             <label>Password:</label>
-            <input type="text" name="nama" class="form-control" placeholder="Masukan Nama" required />
+            <input type="password" name="pass" class="form-control" placeholder="Masukan Password" required />
         </div>
-        <div class="form-group">
-            <label>Nama:</label>
-            <input type="text" name="nama" class="form-control" placeholder="Masukan Nama" required />
-        </div>
+
 
             
         

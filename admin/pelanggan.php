@@ -113,14 +113,14 @@
 			</div>
 			<ul class="box-info">
 				<li>
-					<i class='bx bxs-calendar-check' ></i>
+					<i class='bx bxs-group' ></i>
 					<span class="text">
-						<?php  
-						$data_barang = mysqli_query($kon,"SELECT * FROM pesanan");
-						$jumlah_barang = mysqli_num_rows($data_barang);
-						?>
-						<h3><?php echo $jumlah_barang;  ?></h3>
-						<p>New Order</p>
+						<h3>2834</h3>
+						<h4><?php 
+						
+						
+						?></h4>
+						<p>Reservasi Terdekat</p>
 					</span>
 				</li>
 				<li>

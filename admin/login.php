@@ -11,22 +11,21 @@ if(isset($_REQUEST['email']) && isset($_REQUEST['pass'])){
 	if(mysqli_num_rows($qr)>0){
 		$data=mysqli_fetch_assoc($qr);
 		$_SESSION['user_data']=$data;
-
+		$_SESSION['nama'] = $data['nama'];
+		$_SESSION['user_id'] = $data['id'];
 		if($data['role']==1){
 			$_SESSION['role']== 1;
-			$_SESSION['nama'] == $data['nama'];
+			
 			header("Location:admin.php");
 				
 		}
 		elseif($data['role']==2){
 			$_SESSION['roles']== 2;
-			$_SESSION['nama'] == $data['nama'];
 			header("Location:pegawai.php");
 				
 		}
 		else {
 			$_SESSION['roles']== 3;	
-			$_SESSION['nama'] == $data['nama'];
 			header("Location: pelanggan.php");
 			
 		}

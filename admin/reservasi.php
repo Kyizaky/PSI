@@ -1,7 +1,7 @@
 <?php
     session_start();
 	include "conn.php";
-    if( ! $_SESSION == 3){
+    if( !$_SESSION == 3){
         header("Location: tampilan_login.php");
     }
 ?>
@@ -131,14 +131,15 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $nama=$_SESSION['nama'];
+        $user_id=$_SESSION['user_id'];
         $tanggal=input($_POST["tanggal"]);
         $waktu=input($_POST["waktu"]);
         $barber=input($_POST["barber"]);
         $service=input($_POST["service"]);
 
         //Query input menginput data kedalam tabel anggota
-        $sql="insert into pesanan (nama,tanggal,waktu,barber,service) values
-		('$nama','$tanggal','$waktu','$barber','$service')";
+        $sql="insert into pesanan (nama,user_id,id_barber,tanggal,waktu,barber,service) values
+		('$nama','$user_id','$id_barber','$tanggal','$waktu','$barber','$service')";
 
         //Mengeksekusi/menjalankan query diatas
         $hasil=mysqli_query($kon,$sql);
@@ -158,11 +159,7 @@
 
 
     <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
-        <div class="form-group">
-            <label>Nama:</label>
-            <input type="text" name="nama" class="form-control" placeholder="Masukan Nama" required />
-
-        </div>
+        
         <div class="form-group">
             <label>Tanggal:</label>
             <input type="date" name="tanggal" class="form-control" required/>
