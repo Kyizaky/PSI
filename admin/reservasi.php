@@ -1,11 +1,121 @@
+<?php
+    session_start();
+	include "conn.php";
+    if( ! $_SESSION == 3){
+        header("Location: tampilan_login.php");
+    }
+?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Form Pendaftaran Peserta</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<title>BarberSpot</title>
 </head>
 <body>
-<div class="container">
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">BarberSpot</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="">
+				<a href="pelanggan.php">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="reservasi.php">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Reservasi</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Analytics</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Message</span>
+				</a>
+			</li>
+			<li>
+				<a href="team.php">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Team</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href="logout.php" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num">8</span>
+			</a>
+			<a href="#" class="profile">
+				<img src="img/people.jpeg">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="pelanggan.php">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="pelanggan.php">Home</a>
+						</li>
+                        <li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="Reservasi.php">Reservasi</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+            <div class="container">
     <?php
     //Include file koneksi, untuk koneksikan ke database
     include "conn.php";
@@ -20,7 +130,7 @@
     //Cek apakah ada kiriman form dari method post
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $nama=input($_POST["nama"]);
+        $nama=$_SESSION['nama'];
         $tanggal=input($_POST["tanggal"]);
         $waktu=input($_POST["waktu"]);
         $barber=input($_POST["barber"]);
@@ -91,5 +201,41 @@
         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+			
+
+<!-- tengah tengah  -->
+			<div class="table-data">
+				<div class="order">
+					
+
+
+
+
+</div>
+<!-- tengah tengah  -->
+				<div class="todo">
+					<div class="head">
+						
+					</div>
+					
+				</div>
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script src="js/script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
