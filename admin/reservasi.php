@@ -145,7 +145,7 @@
 
         //Kondisi apakah berhasil atau tidak dalam mengeksekusi query diatas
         if ($hasil) {
-            header("Location:pegawai.php");
+            header("Location:pelanggan.php");
         }
         else {
             echo "<div class='alert alert-danger'> Data Gagal disimpan.</div>";
