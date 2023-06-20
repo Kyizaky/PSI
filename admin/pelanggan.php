@@ -112,10 +112,31 @@
 				</div>
 			</div>
 			<ul class="box-info">
-				<li>
+				<li <?php
+							
+							$qrpesan = "select * from pesanan where id_user = '" .$_SESSION['user_id']."'";
+							$sqlpesan = mysqli_query($kon,$qrpesan);
+							$berhasil= false;
+							if(mysqli_num_rows($sqlpesan)>0){
+								$datapesan = mysqli_fetch_assoc($sqlpesan);
+								$berhasil= true;
+							}
+							else {
+								$berhasil= false;
+								echo ' hidden ';
+							};
+							
+							?>>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
-						<h3>2834</h3>
+						<h3>
+							<?php
+							if($berhasil){
+								echo $datapesan['waktu'];
+							}
+							
+							?>
+						</h3>
 						<h4><?php 
 						
 						

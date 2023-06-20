@@ -1,3 +1,24 @@
-<p><?php echo date('Y-m-d')?></p>
-<p><?php echo date('Y-m-d', strtotime(date('Y-m-d').'+ 7 days'))?> </p>
-<input type="date"  max="<?php echo date('Y-m-d', strtotime(date('Y-m-d').'+ 7 days'))?>" min="<?php echo date('Y-m-d')?>" name="tanggal" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<title>BarberSpot</title>
+</head>
+<ul class="box-info">
+				<li hidden>
+					<i class='bx bxs-group' ></i>
+					<span class="text">
+						<h3>
+							
+						</h3>
+						<h4></h4>
+						<p>Reservasi Terdekat</p>
+					</span>
+				</li>

@@ -138,8 +138,8 @@
         $service=input($_POST["service"]);
 
         //Query input menginput data kedalam tabel anggota
-        $sql="insert into pesanan (nama,user_id,id_barber,tanggal,waktu,barber,service) values
-		('$nama','$user_id','$id_barber','$tanggal','$waktu','$barber','$service')";
+        $sql="insert into pesanan (nama,id_user,id_barber,tanggal,waktu,barber,service) values
+		('$nama','$user_id','$barber','$tanggal','$waktu','$barber','$service')";
 
         //Mengeksekusi/menjalankan query diatas
         $hasil=mysqli_query($kon,$sql);
@@ -170,9 +170,9 @@
             <option>-- Pilih Barber --</option>
 				<?php 
                     $barb = mysqli_query($kon, "SELECT * FROM barber");
-                    while($c = mysqli_fetch_array($barb)){ 
+                    while($databar = mysqli_fetch_array($barb)){ 
                 ?>
-                <option value="<?php echo $c['nama']?>"><?php echo $c['nama']?></option>
+                <option value="<?php echo $databar['nama']?>"><?php echo $databar['nama']?></option>
                 <?php } ?>
 			</select>
     	</div>
