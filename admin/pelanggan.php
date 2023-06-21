@@ -114,12 +114,10 @@
 			<ul class="box-info">
 			<?php
 							
-							$qrpesan = "select * from pesanan where id_user = '" .$_SESSION['user_id']."'";
+							$qrpesan = "select top 1* from pesanan where id_user = '" .$_SESSION['user_id']."' ";
 							$sqlpesan = mysqli_query($kon,$qrpesan);
-							$berhasil= false;
 							if(mysqli_num_rows($sqlpesan)>0){
 								$datapesan = mysqli_fetch_assoc($sqlpesan);
-								$berhasil= true;
 								echo "<li>
 								<i class='bx bxs-group' ></i>
 								<span class='text'>
@@ -140,14 +138,22 @@
 									<p>Reservasi Terdekat</p>
 								</span>
 							</li>";
-							}
-							else {
-								$berhasil= false;
-								
-							};
-							
-							?>
+							}?>
+				<?php 
 				
+				$qrreview = "select * from pesanan where id_user = '" .$_SESSION['user_id']."' AND status = 'completed' ";
+				$sqlreview = mysqli_query($kon,$qrreview);
+				if(mysqli_num_rows($sqlreview)>0){
+					$datablmreview = mysqli_fetch_assoc($sqlreview);
+					echo "<li>
+					<i class='bx bxs-group' ></i>
+					<span class='text'>
+						<h3>Review pengalaman anda</h3>
+						<p>anda punya"; echo mysqli_num_rows($sqlreview)." pesanan yang belum anda review </p>
+					</span>
+				</li>";
+				}
+				?>
 				<li>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
