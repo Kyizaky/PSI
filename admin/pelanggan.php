@@ -112,7 +112,7 @@
 				</div>
 			</div>
 			<ul class="box-info">
-				<li <?php
+			<?php
 							
 							$qrpesan = "select * from pesanan where id_user = '" .$_SESSION['user_id']."'";
 							$sqlpesan = mysqli_query($kon,$qrpesan);
@@ -120,30 +120,34 @@
 							if(mysqli_num_rows($sqlpesan)>0){
 								$datapesan = mysqli_fetch_assoc($sqlpesan);
 								$berhasil= true;
+								echo "<li>
+								<i class='bx bxs-group' ></i>
+								<span class='text'>
+									<h3>";
+										
+										if($berhasil){
+											echo $datapesan['waktu'];
+										};
+										
+									echo "	
+									</h3>
+									<h4>";
+									if($berhasil){
+										echo $datapesan['tanggal'];
+									};
+									echo "
+									</h4>
+									<p>Reservasi Terdekat</p>
+								</span>
+							</li>";
 							}
 							else {
 								$berhasil= false;
-								echo ' hidden ';
+								
 							};
 							
-							?>>
-					<i class='bx bxs-group' ></i>
-					<span class="text">
-						<h3>
-							<?php
-							if($berhasil){
-								echo $datapesan['waktu'];
-							}
-							
 							?>
-						</h3>
-						<h4><?php 
-						
-						
-						?></h4>
-						<p>Reservasi Terdekat</p>
-					</span>
-				</li>
+				
 				<li>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
