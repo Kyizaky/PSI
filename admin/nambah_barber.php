@@ -24,17 +24,23 @@
         $email=input($_POST["email"]);
         $pass=md5(input($_POST["pass"]));
         $no_hp=input($_POST["no_hp"]);
-        $role = 3;
+        $role = 2;
 
         //Query input menginput data kedalam tabel anggota
         $sql="insert into users (nama,email,pass,no_hp,role) values
 		('$nama','$email','$pass','$no_hp','$role')";
+        
 
         //Mengeksekusi/menjalankan query diatas
         $hasil=mysqli_query($kon,$sql);
-
+            
         //Kondisi apakah berhasil atau tidak dalam mengeksekusi query diatas
         if ($hasil) {
+            $qrselect=mysqli_query($kon,"select * from users where nama='".$nama."'");
+            $data=mysqli_fetch_assoc($qrselect);
+            $id_user = $data['id'];
+            $sqlBarber="insert into barber (id_user,nama) values ('$id_user','$nama')";
+            $qrbarber = mysqli_query($kon, $sqlBarber);
             header("Location:tampilan_login.php");
         }
         else {

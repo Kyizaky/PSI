@@ -11,8 +11,11 @@ if(isset($_REQUEST['email']) && isset($_REQUEST['pass'])){
 	if(mysqli_num_rows($qr)>0){
 		$data=mysqli_fetch_assoc($qr);
 		$_SESSION['user_data']=$data;
+		$_SESSION['nama'] = $data['nama'];
+		$_SESSION['user_id'] = $data['id'];
 		if($data['role']==1){
 			$_SESSION['role']== 1;
+			
 			header("Location:admin.php");
 				
 		}

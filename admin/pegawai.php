@@ -174,10 +174,12 @@ if (isset($_GET['id_pesanan'])) {
 			<td><?php echo $data["waktu"];   ?></td>
 			<td><?php echo $data["service"];   ?></td>
 			<td><?php echo $data["Status"];   ?></td>
-			<td>
-                <a href="" class="status process">Oke</a>
-                <a href="" class="status pending">Decline</a>
-			</td>
+			<?php if ($data['Status'] == "Pending"){ ?>
+            <td>
+                <a href="allow.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status process">✅</a>
+                <a href="decline.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status pending">❌</a>
+                <?php } ?>
+            </td>
 		</tr>
 		</tbody>
 		<?php

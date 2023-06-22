@@ -106,23 +106,54 @@
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="admin.php">Home</a>
+							<a class="active" href="pelanggan.php">Home</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<ul class="box-info">
-				<li>
-					<i class='bx bxs-calendar-check' ></i>
-					<span class="text">
-						<?php  
-						$data_barang = mysqli_query($kon,"SELECT * FROM pesanan");
-						$jumlah_barang = mysqli_num_rows($data_barang);
-						?>
-						<h3><?php echo $jumlah_barang;  ?></h3>
-						<p>New Order</p>
+			<?php
+							
+							$qrpesan = "select * from pesanan where id_user = '" .$_SESSION['user_id']."' ";
+							$sqlpesan = mysqli_query($kon,$qrpesan);
+							if(mysqli_num_rows($sqlpesan)>0){
+								$datapesan = mysqli_fetch_assoc($sqlpesan);
+								echo "<li>
+								<i class='bx bxs-group' ></i>
+								<span class='text'>
+									<h3>";
+										
+										if($berhasil){
+											echo $datapesan['waktu'];
+										};
+										
+									echo "	
+									</h3>
+									<h4>";
+									if($berhasil){
+										echo $datapesan['tanggal'];
+									};
+									echo "
+									</h4>
+									<p>Reservasi Terdekat</p>
+								</span>
+							</li>";
+							}?>
+				<?php 
+				
+				$qrreview = "select * from pesanan where id_user = '" .$_SESSION['user_id']."' AND status = 'completed' ";
+				$sqlreview = mysqli_query($kon,$qrreview);
+				if(mysqli_num_rows($sqlreview)>0){
+					$datablmreview = mysqli_fetch_assoc($sqlreview);
+					echo "<li>
+					<i class='bx bxs-group' ></i>
+					<span class='text'>
+						<h3>Review pengalaman anda</h3>
+						<p>anda punya"; echo mysqli_num_rows($sqlreview)." pesanan yang belum anda review </p>
 					</span>
-				</li>
+				</li>";
+				}
+				?>
 				<li>
 					<i class='bx bxs-group' ></i>
 					<span class="text">
