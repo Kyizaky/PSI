@@ -114,7 +114,7 @@
 			<ul class="box-info">
 			<?php
 							
-							$qrpesan = "select top 1* from pesanan where id_user = '" .$_SESSION['user_id']."' ";
+							$qrpesan = "select * from pesanan where id_user = '" .$_SESSION['user_id']."' ";
 							$sqlpesan = mysqli_query($kon,$qrpesan);
 							if(mysqli_num_rows($sqlpesan)>0){
 								$datapesan = mysqli_fetch_assoc($sqlpesan);
