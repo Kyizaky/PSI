@@ -1,7 +1,7 @@
 <?php
     session_start();
 	include "conn.php";
-    if( ! $_SESSION == 3){
+    if( ! $_SESSION == 2){
         header("Location: tampilan_login.php");
     }
 ?>
@@ -29,33 +29,15 @@
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
-				<a href="pelanggan.php">
+				<a href="pegawai.php">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a href="reservasi.php">
+				<a href="pesanan_pegawai.php">
 					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">Reservasi</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text">Analytics</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-message-dots' ></i>
-					<span class="text">Message</span>
-				</a>
-			</li>
-			<li>
-				<a href="team.php">
-					<i class='bx bxs-group' ></i>
-					<span class="text">Team</span>
+					<span class="text">Semua pesanan</span>
 				</a>
 			</li>
 		</ul>
@@ -82,7 +64,14 @@
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link">Categories</a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
 			<a href="#" class="notification">
@@ -102,63 +91,27 @@
 					<h1>Dashboard</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="pelanggan.php">Dashboard</a>
+							<a href="admin.php">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="pelanggan.php">Home</a>
+							<a class="active" href="admin.php">Home</a>
 						</li>
 					</ul>
 				</div>
+				
 			</div>
-			<ul class="box-info">
-			<?php
+					<?php  
 						$ide = $_SESSION['user_id'];
-					$barang = mysqli_query($kon,"SELECT * FROM users u JOIN customers c on (u.id = c.id_user) WHERE u.id=$ide");
-					$barang = mysqli_fetch_array($barang);
-					$id_cust = $barang['id_customer'];
-							$qrpesan = "select * from pesanan where id_customer = $id_cust ";
-							$sqlpesan = mysqli_query($kon,$qrpesan);
-							if(mysqli_num_rows($sqlpesan)>0){
-								$datapesan = mysqli_fetch_assoc($sqlpesan);
-								
-							}?>
-				<?php 
-				
-				$qrreview = "select * from pesanan where id_customer = $id_cust AND status = 'completed' ";
-				$sqlreview = mysqli_query($kon,$qrreview);
-				if(mysqli_num_rows($sqlreview)>0){
-					$datablmreview = mysqli_fetch_assoc($sqlreview);
-					echo "<li>
-					<i class='bx bxs-group' ></i>
-					<span class='text'>
-						<h3>Review pengalaman anda</h3>
-						<p>anda punya"; echo mysqli_num_rows($sqlreview)." pesanan yang belum anda review </p>
-					</span>
-				</li>";
-				}
-				?>
-				<li>
-					<i class='bx bxs-group' ></i>
-					<span class="text">
-						<h3>2834</h3>
-						<p>Visitors</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-dollar-circle' ></i>
-					<span class="text">
-						<h3>$2543</h3>
-						<p>Total Sales</p>
-					</span>
-				</li>
-				
-			</ul>
+						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
+						$barang = mysqli_fetch_array($barang);
+						$id_barber = $barang['id_barber'];
+						?>
 
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Recent Orders</h3>
+						<h3>Semua Pesanan</h3>
 						<i class='bx bx-search' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>
@@ -188,14 +141,12 @@ if (isset($_GET['id_pesanan'])) {
 		<th>Waktu</th>
 		<th>Service</th>
 		<th>Status</th>
-		<th colspan='2'>Aksi</th>
 
 	</tr>
 	</thead>
 
 	<?php
-
-	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE p.id_customer = $id_cust";
+	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE id_barber = $id_barber";
 
 	$hasil=mysqli_query($kon,$sql);
 	$no=0;
@@ -211,11 +162,6 @@ if (isset($_GET['id_pesanan'])) {
 			<td><?php echo $data["waktu"];   ?></td>
 			<td><?php echo $data["service"];   ?></td>
 			<td><?php echo $data["Status"];   ?></td>
-			<?php if ($data['Status'] == "Nunggu bayar"){ ?>
-            <td>
-				<a href="./midtrans/examples/snap/checkout-process-simple-version.php?order_id=<?= $data['order_id']; ?>" class="status process">✅</a>
-                <?php } ?>
-            </td>
 		</tr>
 		</tbody>
 		<?php
@@ -225,7 +171,6 @@ if (isset($_GET['id_pesanan'])) {
 
 </div>
 		</main>
-		<!-- MAIN -->
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->

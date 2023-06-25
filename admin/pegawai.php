@@ -1,5 +1,9 @@
 <?php
+    session_start();
 	include "conn.php";
+    if( ! $_SESSION == 2){
+        header("Location: tampilan_login.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,9 +35,9 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="pesanan_pegawai.php">
 					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">Req</span>
+					<span class="text">Semua pesanan</span>
 				</a>
 			</li>
 		</ul>
@@ -103,20 +107,36 @@
 					<i class='bx bxs-calendar-check' ></i>
 					<span class="text">
 						<?php  
-						$data_barang = mysqli_query($kon,"SELECT * FROM pesanan where barber='Maulana'");
+						$ide = $_SESSION['user_id'];
+						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
+						$barang = mysqli_fetch_array($barang);
+						$id_barber = $barang['id_barber'];
+						$data_barang = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status !='Completed' AND Status != 'Cancelled'");
+						$done = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status ='Completed'");
+						$cancel = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status ='Cancelled'");
 						$jumlah_barang = mysqli_num_rows($data_barang);
+						$jumlah_done = mysqli_num_rows($done);
+						$jumlah_cancel = mysqli_num_rows($cancel);
 						?>
 						<h3><?php echo $jumlah_barang;  ?></h3>
 						<p>New Order</p>
 					</span>
 				</li>
 				<li>
-					<i class='bx bxs-dollar-circle' ></i>
+					<i class='bx bxs-calendar-check' ></i>
 					<span class="text">
-						<h3>$2543</h3>
-						<p>Total Sales</p>
+						<h3><?php echo $jumlah_done;  ?></h3>
+						<p>Order Completed</p>
 					</span>
 				</li>
+				<li>
+					<i class='bx bxs-calendar-check' ></i>
+					<span class="text">
+						<h3><?php echo $jumlah_cancel;  ?></h3>
+						<p>Order Cancel</p>
+					</span>
+				</li>
+				
 			</ul>
 
 			<div class="table-data">
@@ -158,7 +178,8 @@ if (isset($_GET['id_pesanan'])) {
 	</thead>
 
 	<?php
-	$sql="select * from pesanan WHERE barber = 'Maulana'";
+
+	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE id_barber = $id_barber";
 
 	$hasil=mysqli_query($kon,$sql);
 	$no=0;

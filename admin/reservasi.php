@@ -120,6 +120,10 @@
     //Include file koneksi, untuk koneksikan ke database
     include "conn.php";
 
+					$ide = $_SESSION['user_id'];
+					$barang = mysqli_query($kon,"SELECT * FROM users u JOIN customers c on (u.id = c.id_user) WHERE u.id=$ide");
+					$barang = mysqli_fetch_array($barang);
+					$id_cust = $barang['id_customer'];
     //Fungsi untuk mencegah inputan karakter yang tidak sesuai
     function input($data) {
         $data = trim($data);
@@ -130,16 +134,16 @@
     //Cek apakah ada kiriman form dari method post
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        $nama=$_SESSION['nama'];
-        $user_id=$_SESSION['user_id'];
+        $id_customer=$id_cust;
+        $id_barber=input($_POST['id_barber']);
+        $id_service=input($_POST['id_service']);
         $tanggal=input($_POST["tanggal"]);
         $waktu=input($_POST["waktu"]);
-        $barber=input($_POST["barber"]);
-        $service=input($_POST["service"]);
+		$order_id =rand();
 
         //Query input menginput data kedalam tabel anggota
-        $sql="insert into pesanan (nama,id_user,id_barber,tanggal,waktu,barber,service) values
-		('$nama','$user_id','$barber','$tanggal','$waktu','$barber','$service')";
+        $sql="insert into pesanan (id_customer,id_barber,id_service,tanggal,waktu,order_id) values
+		('$id_customer','$id_barber','$id_service','$tanggal','$waktu','$order_id')";
 
         //Mengeksekusi/menjalankan query diatas
         $hasil=mysqli_query($kon,$sql);
@@ -166,13 +170,13 @@
         </div>
 		<div class="form-group">
             <label>Barber:</label>
-            <select name="barber" id="#" class="form-control">
+            <select name="id_barber" id="#" class="form-control">
             <option>-- Pilih Barber --</option>
 				<?php 
                     $barb = mysqli_query($kon, "SELECT * FROM barber");
                     while($databar = mysqli_fetch_array($barb)){ 
                 ?>
-                <option value="<?php echo $databar['nama']?>"><?php echo $databar['nama']?></option>
+                <option value="<?php echo $databar['id_barber']?>"><?php echo $databar['nama']?></option>
                 <?php } ?>
 			</select>
     	</div>
@@ -189,13 +193,13 @@
        
         <div class="form-group">
             <label>Service:</label>
-            <select name="service" id="#" class="form-control">
+            <select name="id_service" id="#" class="form-control">
                 <option>-- Pilih Service --</option>
 				<?php 
                     $serv = mysqli_query($kon, "SELECT * FROM service");
                     while($c = mysqli_fetch_array($serv)){ 
                 ?>
-                <option value="<?php echo $c['service']?>"><?php echo $c['service']?></option>
+                <option value="<?php echo $c['id_service']?>"><?php echo $c['service']?></option>
                 <?php } ?>
 			</select>
         </div>

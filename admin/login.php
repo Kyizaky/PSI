@@ -27,7 +27,6 @@ if(isset($_REQUEST['email']) && isset($_REQUEST['pass'])){
 		else {
 			$_SESSION['roles']== 3;	
 			header("Location: pelanggan.php");
-			
 		}
 
 	}
