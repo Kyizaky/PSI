@@ -125,7 +125,7 @@
 							}?>
 				<?php 
 				
-				$qrreview = "select * from pesanan where id_customer = $id_cust AND status = 'completed' ";
+				$qrreview = "select * from pesanan where id_customer = $id_cust AND status = 'reserved' ";
 				$sqlreview = mysqli_query($kon,$qrreview);
 				if(mysqli_num_rows($sqlreview)>0){
 					$datablmreview = mysqli_fetch_assoc($sqlreview);
@@ -138,21 +138,6 @@
 				</li>";
 				}
 				?>
-				<li>
-					<i class='bx bxs-group' ></i>
-					<span class="text">
-						<h3>2834</h3>
-						<p>Visitors</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-dollar-circle' ></i>
-					<span class="text">
-						<h3>$2543</h3>
-						<p>Total Sales</p>
-					</span>
-				</li>
-				
 			</ul>
 
 			<div class="table-data">
@@ -195,7 +180,7 @@ if (isset($_GET['id_pesanan'])) {
 
 	<?php
 
-	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE p.id_customer = $id_cust";
+	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE p.id_customer = $id_cust AND NOT p.Status= 'cancelled' ";
 
 	$hasil=mysqli_query($kon,$sql);
 	$no=0;
@@ -211,10 +196,13 @@ if (isset($_GET['id_pesanan'])) {
 			<td><?php echo $data["waktu"];   ?></td>
 			<td><?php echo $data["service"];   ?></td>
 			<td><?php echo $data["Status"];   ?></td>
-			<?php if ($data['Status'] == "Nunggu bayar"){ ?>
+			<?php 
+			if ($data['Status'] == "reserved" && $data['tanggal'] != date('Y-m-d')){ ?>
             <td>
-				<a href="./midtrans/examples/snap/checkout-process-simple-version.php?order_id=<?= $data['order_id']; ?>" class="status process">✅</a>
-                <?php } ?>
+				<a href="cancelPelanggan.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status pending">❌</a>
+            <?php }
+			elseif($data['Status'] == "reserved" && $data['tanggal'] == date('Y-m-d')){?>
+				tidak dapat dibatalkan <?php }?>
             </td>
 		</tr>
 		</tbody>
