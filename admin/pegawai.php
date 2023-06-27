@@ -195,11 +195,20 @@ if (isset($_GET['id_pesanan'])) {
 			<td><?php echo $data["waktu"];   ?></td>
 			<td><?php echo $data["service"];   ?></td>
 			<td><?php echo $data["Status"];   ?></td>
-			<?php if ($data['Status'] == "Pending"){ ?>
+			
             <td>
+				<?php if ($data['Status'] == "Pending"){ ?>
                 <a href="allow.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status process">✅</a>
                 <a href="decline.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status pending">❌</a>
-                <?php } ?>
+                <?php } 
+				if ($data['Status'] == "reserved"){
+					if($data['tanggal'] == date('Y-m-d')){?>
+						<a href="pembayaran.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status process">✅</a><?php
+					}
+					else{?>
+						<p>menunggu hari reservasi</p><?php
+					}
+				}?>
             </td>
 		</tr>
 		</tbody>
