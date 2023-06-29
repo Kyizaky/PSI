@@ -1,9 +1,10 @@
-<?php
-    session_start();
-	include "conn.php";
-    if( ! $_SESSION == 2){
-        header("Location: tampilan_login.php");
-    }
+<?php 
+include "conn.php";
+$id = $_GET["id_pesanan"];
+$quer = "SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service)  p.id_pesanan=$id";
+$sqli = mysqli_query($kon, $quer);
+$data = mysqli_fetch_assoc($sqli);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,9 +87,10 @@
 
 		<!-- MAIN -->
 		<main>
+        <div>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1>Detail Pesanan</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a href="admin.php">Dashboard</a>
@@ -101,77 +103,25 @@
 				</div>
 				
 			</div>
-					<?php  
-						$ide = $_SESSION['user_id'];
-						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
-						$barang = mysqli_fetch_array($barang);
-						$id_barber = $barang['id_barber'];
-						?>
-
-			<div class="table-data">
-				<div class="order">
-					<div class="head">
-						<h3>Semua Pesanan</h3>
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
-					<?php
-
-
-//Cek apakah ada kiriman form dari method post
-if (isset($_GET['id_pesanan'])) {
-	$id_pesanan=htmlspecialchars($_GET["id_pesanan"]);
-
-
-	//Kondisi apakah berhasil atau tidak
-
-	}
-?>
-
-
- <tr class="table-danger">
-		<br>
-	<thead>
-	<tr>
-   <table class="my-3 table table-bordered">
-		<tr class="table-primary">           
-		<th>No</th>
-		<th>Nama</th>
-		<th>Tanggal</th>
-		<th>Waktu</th>
-		<th>Service</th>
-		<th>Status</th>
-		<th>Aksi</th>
-
-	</tr>
-	</thead>
-
-	<?php
-	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE id_barber = $id_barber ORDER BY p.tanggal DESC";
-
-	$hasil=mysqli_query($kon,$sql);
-	$no=0;
-	while ($data = mysqli_fetch_array($hasil)) {
-		$no++;
-
-		?>
-		<tbody>
-		<tr>
-			<td><?php echo $no;?></td>
-			<td><?php echo $data["nama"]; ?></td>
-			<td><?php echo $data["tanggal"];   ?></td>
-			<td><?php echo $data["waktu"];   ?></td>
-			<td><?php echo $data["service"];   ?></td>
-			<td><?php echo $data["Status"];   ?></td>
-			<td><a href="detailReservasi.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status process">✅</a></td>
-		</tr>
-		</tbody>
-		<?php
-	}
-	?>
-</table>
-
-</div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="tanggal">Tanggal</label>
+                    <input type="text" class="form-control" id="tanggal">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="pelanggan">pelanggan</label>
+                    <input type="text" class="form-control" id="pelanggan" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="barber">barber</label>
+                <input type="text" class="form-control" id="barber" >
+            </div>
+            <div class="form-group">
+                <label for="sales">Address 2</label>
+                <input type="text" class="form-control" id="sales" >
+            </div>
+        </div>
 		</main>
 		<!-- MAIN -->
 	</section>

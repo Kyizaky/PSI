@@ -179,7 +179,7 @@ if (isset($_GET['id_pesanan'])) {
 
 	<?php
 
-	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE id_barber = $id_barber";
+	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE id_barber = $id_barber AND p.status not like 'cancelled'";
 
 	$hasil=mysqli_query($kon,$sql);
 	$no=0;
@@ -206,7 +206,7 @@ if (isset($_GET['id_pesanan'])) {
 						<a href="pembayaran.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status process">✅</a><?php
 					}
 					else{?>
-						<p>menunggu hari reservasi</p><?php
+						menunggu hari reservasi<?php
 					}
 				}?>
             </td>
