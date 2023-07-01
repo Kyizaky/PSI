@@ -1,5 +1,7 @@
 <?php
 	include "conn.php";
+
+	
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +13,14 @@
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="css/style.css">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      /* Style CSS untuk menyesuaikan tampilan chart */
+      canvas {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
 
 	<title>BarberSpot</title>
 </head>
@@ -111,10 +121,6 @@
 						</li>
 					</ul>
 				</div>
-				<a href="#" class="btn-download">
-					<i class='bx bxs-cloud-download' ></i>
-					<span class="text">Download PDF</span>
-				</a>
 			</div>
 
 			<ul class="box-info">
@@ -139,114 +145,108 @@
 				<li>
 					<i class='bx bxs-dollar-circle' ></i>
 					<span class="text">
-						<h3>$2543</h3>
+					<?php  
+						$data_penjualan = mysqli_query($kon,"SELECT SUM(sales) as 'total' FROM sales");
+						$jumlah_penjualan = mysqli_fetch_array($data_penjualan);
+						?>
+						<h3><?php echo $jumlah_penjualan['total'];  ?></h3>
 						<p>Total Sales</p>
 					</span>
 				</li>
 			</ul>
 
 
-			<div class="table-data">
-				<div class="order">
-					<div class="head">
-						<h3>Recent Orders</h3>
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
-					<?php
+			<div class="flex h-full">
+        <!-- Line Chart -->
+        <div class="w-1/2 p-2">
+          <div class="w-full h-full bg-white shadow-xl rounded-xl">
+            <h2 class="text-2xl font-semibold mb-4 px-5 py-3">BBM Terjual Perbulan</h2>
+            <div class="max-h-96">
+              <canvas id="lineChart" class="w-full h-full"></canvas>
+            </div>
+          </div>
+        </div>
 
-
-//Cek apakah ada kiriman form dari method post
-if (isset($_GET['id_pesanan'])) {
-	$id_pesanan=htmlspecialchars($_GET["id_pesanan"]);
-
-
-	//Kondisi apakah berhasil atau tidak
-
-	}
-?>
-
-
- <tr class="table-danger">
-		<br>
-	<thead>
-	<tr>
-   <table class="my-3 table table-bordered">
-		<tr class="table-primary">           
-		<th>No</th>
-		<th>Nama</th>
-		<th>Tanggal</th>
-		<th>Waktu</th>
-		<th>Barber</th>
-		<th>Service</th>
-		<th colspan='2'>Keterangan</th>
-
-	</tr>
-	</thead>
-
-	<?php
-	$sql="select * from pesanan order by id_pesanan";
-
-	$hasil=mysqli_query($kon,$sql);
-	$no=0;
-	while ($data = mysqli_fetch_array($hasil)) {
-		$no++;
-
-		?>
-		<tbody>
-		<tr>
-			<td><?php echo $no;?></td>
-			<td><?php echo $data["nama"]; ?></td>
-			<td><?php echo $data["tanggal"];   ?></td>
-			<td><?php echo $data["waktu"];   ?></td>
-			<td><?php echo $data["barber"];   ?></td>
-			<td><?php echo $data["service"];   ?></td>
-			<td><?php echo $data["Status"];   ?></td>
-			<td>
-			</td>
-		</tr>
-		</tbody>
-		<?php
-	}
-	?>
-</table>
-
-</div>
-				<div class="todo">
-					<div class="head">
-						<h3>Todos</h3>
-						<i class='bx bx-plus' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
-					<ul class="todo-list">
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="not-completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="not-completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-					</ul>
-				</div>
-			</div>
+		<!-- Pie Chart -->
+        <div class="w-1/2 p-2">
+          <div class="w-full h-full bg-white rounded-xl shadow-xl">
+            <h2 class="py-3 font-semibold text-3xl text-center">BBM Terjual</h2>
+            <div class="w-full h-96 py-5">
+              <canvas class="w-full h-full" id="pieChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+		
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	
+	<script>
+    const pieChartCtx = document.getElementById('pieChart').getContext('2d');
+    new Chart(pieChartCtx, {
+      type: 'pie',
+      data: {
+		
+        labels: ['Pertalite', 'Pertamax', 'Pertamax Turbo', 'Pertamina Dex', 'Dextlite', 'Solar',],
+        datasets: [{
+          label: 'Rasio Penjualan',
+          data: [1000, 2500, 1800, 1200, 900, 3000],
+          backgroundColor: ['rgba(0, 123, 255, 0.7)', 'rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.7)', 'rgba(153, 102, 255, 0.7)'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+        legend: {
+          position: 'right'
+        }
+      }
+      }
+    });
+  </script>
+  <script>
+    const ctx = document.getElementById('lineChart').getContext('2d');
+    var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
+    gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.5)');
+    gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+    gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.2)');
+  
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Keuntungan',
+          data: [500, 800, 650, 950, 700, 1200],
+          borderColor: 'rgba(94, 114, 228)',
+          backgroundColor: gradientStroke1,
+          borderWidth: 2,
+          tension: 0.4,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 100
+            }
+          }
+        }
+      }
+    });
+  </script>
 
 	<script src="js/script.js"></script>
 </body>
