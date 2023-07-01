@@ -41,39 +41,8 @@
         }
     }
     ?>
-    <h2>Daftar akun pegawai</h2>
+    
 
 
     <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
-        
-        <div class="form-group">
-            <label>Username: </label>
-            <input type="text" name="username" class="form-control" required/>
-        </div>
-        <div class="form-group">
-            <label>Email: </label>
-            <input type="email" name="email" class="form-control" required/>
-        </div>
-        <div class="form-group">
-            <label>Password: </label>
-            <input type="password" name="pass" class="form-control" required/>
-        </div>
-        <div class="form-group">
-            <label>Nama: </label>
-            <input type="text" name="nama" class="form-control" required/>
-        </div>
-        <div class="form-group">
-            <label>jenis kelamin: </label>
-            <input type="text" name="jk" class="form-control" required/>
-        </div>
-        <div class="form-group">
-            <label>No HP: </label>
-            <input type="number" name="no_hp" class="form-control" required/>
-        </div>
-        <div class="form-group">
-            <label>Alamat: </label>
-            <input type="text" name="alamat" class="form-control" required/>
-        </div>
-        
-        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-    </form>
+    
