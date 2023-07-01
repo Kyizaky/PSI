@@ -179,9 +179,10 @@ if (isset($_GET['id_pesanan'])) {
 
 	<?php
 
-	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE id_barber = $id_barber AND p.status not like 'cancelled'";
+	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON (p.id_service = s.id_service) WHERE id_barber = $id_barber AND p.status not like 'cancelled'";
 
 	$hasil=mysqli_query($kon,$sql);
+	if($hasil){
 	$no=0;
 	while ($data = mysqli_fetch_array($hasil)) {
 		$no++;
@@ -213,6 +214,7 @@ if (isset($_GET['id_pesanan'])) {
 		</tr>
 		</tbody>
 		<?php
+		}
 	}
 	?>
 </table>

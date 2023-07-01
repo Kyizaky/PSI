@@ -166,7 +166,7 @@
         
         <div class="form-group">
             <label>Tanggal:</label>
-            <input type="date"  max="<?php echo date('Y-m-d', strtotime(date('Y-m-d').'+ 7 days'))?>" min="<?php echo date('Y-m-d', strtotime(date('Y-m-d')))?>" name="tanggal" class="form-control" required/>
+            <input type="date"  name="tanggal" class="form-control" required/>
         </div>
 		<div class="form-group">
             <label>Barber:</label>

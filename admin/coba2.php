@@ -17,7 +17,6 @@
         $pass=md5(input($_POST["pass"]));
         $role= 3;
         $nama=input($_POST["nama"]);
-        $jk=input($_POST["jk"]);
         $no_hp=input($_POST["no_hp"]);
         $alamat=input($_POST["alamat"]);
 
@@ -25,7 +24,7 @@
         $sql1="insert into users (username,email,pass,role) values ('$username','$email','$pass','$role')";
         $hasil1=mysqli_query($kon,$sql1);
         $rows = mysqli_fetch_array(mysqli_query($kon,"SELECT * FROM users ORDER BY id DESC"));
-        $sql2="insert into customers (id_user,nama,jk,no_hp,alamat) values ('$rows[id]','$nama','$jk','$no_hp','$alamat')";
+        $sql2="insert into customers (id_user,nama,no_hp,alamat) values ('$rows[id]','$nama','$no_hp','$alamat')";
 
         //Mengeksekusi/menjalankan query diatas
         $hasil2=mysqli_query($kon,$sql2);
@@ -61,10 +60,6 @@
         <div class="form-group">
             <label>Nama: </label>
             <input type="text" name="nama" class="form-control" required/>
-        </div>
-        <div class="form-group">
-            <label>jenis kelamin: </label>
-            <input type="text" name="jk" class="form-control" required/>
         </div>
         <div class="form-group">
             <label>No HP: </label>
