@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Daftar Pegawai</title>
+    <title>Login Customer</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -20,12 +20,12 @@
 
     <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body class="img js-fullheight" style="background-image: url(images/bg.jpg)">
+  <body class="img js-fullheight" style="background-image: url(images/bg1.jpg)">
     <section class="ftco-section">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-6 text-center mb-5">
-            <h2 class="heading-section">Sign Up</h2>
+            <h2 class="heading-section">Sign in</h2>
           </div>
         </div>
         <div class="row justify-content-center">
@@ -34,58 +34,24 @@
               <form action="#" class="signin-form">
                 <div class="form-group">
                   <input
+                    type="text"
+                    class="form-control"
                     placeholder="Username"
-                    type="text"
-                    name="username"
-                    class="form-control"
                     required
                   />
                 </div>
                 <div class="form-group">
                   <input
-                    placeholder="Email"
-                    type="email"
-                    name="email"
-                    class="form-control"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    placeholder="Password"
+                    id="password-field"
                     type="password"
-                    name="pass"
                     class="form-control"
+                    placeholder="Password"
                     required
                   />
-                </div>
- 
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                  <label class="form-check-label" for="inlineRadio1">Laki-Laki</label>
-                </div>
-                <div style="margin-left: 100px;" class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                  <label class="form-check-label"  for="inlineRadio2">Perempuan</label>
-                </div>
-                </div>
-                <div class="form-group">
-                  <input
-                    placeholder="Phone Number"
-                    type="number"
-                    name="no_hp"
-                    class="form-control"
-                    required
-                  />
-                </div>
-                <div class="form-group">
-                  <input
-                    placeholder="Address"
-                    type="text"
-                    name="alamat"
-                    class="form-control"
-                    required
-                  />
+                  <span
+                    toggle="#password-field"
+                    class="fa fa-fw fa-eye field-icon toggle-password"
+                  ></span>
                 </div>
                 <div class="form-group">
                   <button
@@ -95,8 +61,19 @@
                     Sign In
                   </button>
                 </div>
+                <div class="form-group d-md-flex">
+                  <div class="w-50">
+                    <label class="checkbox-wrap checkbox-primary"
+                      >Remember Me
+                      <input type="checkbox" checked />
+                      <span class="checkmark"></span>
+                    </label>
+                  </div>
+                </div>
               </form>
-              
+              <div class="w-100 text-center">
+                <a href="daftar.html">Sign Up</a>
+              </div>
             </div>
           </div>
         </div>
