@@ -3,8 +3,44 @@
 
 
 
-	$quer = "SELECT b.nama as 'barber', SUM(s.sales) FROM barber b JOIN pesanan p ON (b.id_barber = p.id_barber) JOIN sales s ON (s.id_pesanan = p.id_pesanan); "
+	$quer = "SELECT b.nama as 'barber', SUM(s.sales) as 'profit' FROM barber b JOIN pesanan p ON (b.id_barber = p.id_barber) JOIN sales s ON (s.id_pesanan = p.id_pesanan) GROUP BY p.id_barber; ";
+	$hasil=mysqli_query($kon,$quer);
+
+	if ($hasil){
+		$databar=array();
+		$count = 0;
+		while($rows=mysqli_fetch_array($hasil)){
+			$databar[$count]["label"] = $rows['barber'];
+			$databar[$count]["y"] = $rows['profit'];
+			$count=$count+1;
+		}
+	}
+	else{
+		echo "<p>terjadi kesalahan</p>";
+	};
+
+	$quer1 = "SELECT se.service as 'service', SUM(s.sales) as 'profit' FROM barber b JOIN pesanan p ON (b.id_barber = p.id_barber) JOIN sales s ON (s.id_pesanan = p.id_pesanan) JOIN service se on (p.id_service=se.id_service)  GROUP BY se.id_service; ";
+	$quer2 = "SELECT SUM(sales) as 'sum' FROM  sales; ";
+	$hasil1=mysqli_query($kon,$quer1);
+	$hasil2=mysqli_query($kon,$quer2);
+	if ($hasil1){
+		if($hasil2){
+			$sum=mysqli_fetch_assoc($hasil2);
+			$datapie=array();
+			$count1 = 0;
+			while($rows1=mysqli_fetch_array($hasil1)){
+				$datapie[$count1]["label"] = $rows1['service'];
+				$datapie[$count1]["y"] = ($rows1['profit']/$sum['sum'])*100;
+				$count1=$count1+1;
+			}
+		}
+	}
+	else{
+		echo "<p>terjadi kesalahan</p>";
+	}
 	
+	
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,6 +53,7 @@
 	<!-- My CSS -->
 	<link rel="stylesheet" href="css/style.css">
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
     <style>
       /* Style CSS untuk menyesuaikan tampilan chart */
       canvas {
@@ -180,7 +217,8 @@
           </div>
         </div>
       </div>
-		
+	  <div id="barchart-profit" style="height: 370px; width: 100%;"></div>
+	  <div id="pie-service" style="height: 370px; width: 100%;"></div>
 		</main>
 		<!-- MAIN -->
 	</section>
@@ -250,7 +288,48 @@
       }
     });
   </script>
-
+<script>
+	window.onload = function () {
+ 
+	var chart = new CanvasJS.Chart("barchart-profit", {
+		animationEnabled: true,
+		theme: "light2", // "light1", "light2", "dark1", "dark2"
+		title: {
+			text: "Peringkat Profit"
+		},
+		axisY: {
+			title: "Rupiah"
+		},
+		data: [{
+			type: "column",
+			dataPoints: <?php echo json_encode($databar, JSON_NUMERIC_CHECK); ?>
+		}]
+	});
+	chart.render();
+}
+</script>
+<script>
+window.onload = function() {
+ 
+ 
+var chart = new CanvasJS.Chart("pie-service", {
+	animationEnabled: true,
+	title: {
+		text: "Usage Share of Desktop Browsers"
+	},
+	subtitles: [{
+		text: "November 2017"
+	}],
+	data: [{
+		type: "pie",
+		yValueFormatString: "#,##0.00\"%\"",
+		indexLabel: "{label} ({y})",
+		dataPoints: <?php echo json_encode($datapie, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+}
+</script>
 	<script src="js/script.js"></script>
 </body>
 </html>

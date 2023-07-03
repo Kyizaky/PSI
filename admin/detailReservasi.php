@@ -1,7 +1,7 @@
 <?php 
 include "conn.php";
 $id = $_GET["id_pesanan"];
-$quer = "SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service)  p.id_pesanan=$id";
+$quer = "SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON (p.id_service = s.id_service) where p.id_pesanan=$id";
 $sqli = mysqli_query($kon, $quer);
 $data = mysqli_fetch_assoc($sqli);
 
