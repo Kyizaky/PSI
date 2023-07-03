@@ -1,6 +1,9 @@
 <?php
 	include "conn.php";
 
+
+
+	$quer = "SELECT b.nama as 'barber', SUM(s.sales) FROM barber b JOIN pesanan p ON (b.id_barber = p.id_barber) JOIN sales s ON (s.id_pesanan = p.id_pesanan); "
 	
 ?>
 <!DOCTYPE html>
