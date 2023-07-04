@@ -1,9 +1,6 @@
 <?php
     session_start();
 	include "conn.php";
-    if( !$_SESSION == 3){
-        header("Location: tampilan_login.php");
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

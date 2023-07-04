@@ -1,9 +1,7 @@
 <?php
     session_start();
 	include "conn.php";
-    if( !$_SESSION['role'] == 3){
-        header("Location: tampilan_login.php");
-    }
+
 	$ide = $_SESSION['user_id'];
 	$barang = mysqli_query($kon,"SELECT * FROM users u JOIN customers c on (u.id = c.id_user) WHERE u.id=$ide");
 	$barang = mysqli_fetch_array($barang);
@@ -158,7 +156,7 @@ if (isset($_GET['id_pesanan'])) {
 
 	<?php
 
-	$sql="SELECT  p.id_pesanan, b.nama as 'nama', p.tanggal as 'tanggal', p.waktu as 'waktu', s.service as 'service', p.Status as 'status' FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) JOIN barber b ON (p.id_barber=b.id_barber) WHERE p.id_customer = $id_cust AND NOT p.Status= 'selesai' ORDER BY p.tanggal limit 5  ";
+	$sql="SELECT  p.id_pesanan, b.nama as 'nama', p.tanggal as 'tanggal', p.waktu as 'waktu', s.service as 'service', p.Status as 'status' FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) JOIN barber b ON (p.id_barber=b.id_barber) WHERE p.id_customer = $id_cust AND NOT p.Status= 'selesai' ORDER BY p.tanggal DESC limit 5   ";
 
 	$hasil=mysqli_query($kon,$sql);
 	$no=0;
@@ -179,7 +177,7 @@ if (isset($_GET['id_pesanan'])) {
 			if ($data['status'] == "reserved" && $data['tanggal'] != date('Y-m-d')){ ?>
 				<a href="cancelPelanggan.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status pending">❌</a>
             <?php }
-			elseif($data['status'] == "reserved" && $data['tanggal'] == date('Y-m-d')){?>
+			elseif($data['status'] == "reserved" && $data['tanggal']==date('Y-m-d')){?>
 				tidak dapat dibatalkan <?php }?>
             </td>
 		</tr>

@@ -108,7 +108,7 @@
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
+			<li>
 				<a href="admin.php">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
@@ -120,7 +120,7 @@
 					<span class="text">Chart Service</span>
 				</a>
 			</li>
-			<li>
+			<li class="active">
 				<a href="chartBarber.php">
 					<i class='bx bxs-group' ></i>
 					<span class="text">Chart Barber</span>

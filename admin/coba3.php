@@ -24,21 +24,12 @@
         //Query input menginput data kedalam tabel anggota
         $sql1="insert into users (username,email,pass,role) values ('$username','$email','$pass','$role')";
         $hasil1=mysqli_query($kon,$sql1);
-        $rows = mysqli_fetch_array(mysqli_query($kon,"SELECT * FROM users ORDER BY id DESC"));
-        $sql2="insert into barber (id_user,nama,jk,no_hp,alamat) values ('$rows[id]','$nama','$jk','$no_hp','$alamat')";
-
         //Mengeksekusi/menjalankan query diatas
-        $hasil2=mysqli_query($kon,$sql2);
-        //Kondisi apakah berhasil atau tidak dalam mengeksekusi query diatas
-        if ($hasil1) {
-            if($hasil2){
-                header("location:coba.php");
-            }
-        }
-        else {
-            echo "<div class='alert alert-danger'> Data Gagal disimpan.</div>";
 
-        }
+        //Kondisi apakah berhasil atau tidak dalam mengeksekusi query diatas
+
+                header("location:coba.php");
+       
     }
     ?>
     <h2>daftar akun admin</h2>

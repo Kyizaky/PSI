@@ -1,8 +1,5 @@
 <?php 
 include "conn.php";
-if( ! $_SESSION['role'] == 2){
-	header("Location: tampilan_login.php");
-}
 $id = $_GET['id_pesanan'];
 $quer = "SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE  p.id_pesanan=$id";
 $sqli = mysqli_query($kon, $quer);

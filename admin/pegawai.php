@@ -1,9 +1,7 @@
 <?php
     session_start();
 	include "conn.php";
-    if( ! $_SESSION['role'] == 2){
-        header("Location: tampilan_login.php");
-    }
+    
 	$ide = $_SESSION['user_id'];
 						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
 						$barang = mysqli_fetch_array($barang);
@@ -203,8 +201,8 @@ if (isset($_GET['id_pesanan'])) {
                 <a href="decline.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status pending">❌</a>
                 <?php } 
 				if ($data['Status'] == "reserved"){
-					if($data['tanggal'] == date('Y-m-d')){?>
-						<a href="pembayaran.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status process">✅</a><?php
+					if($data['tanggal']==date("Y-m-d")){?>
+						<a href="pembayaran.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status process">pembayaran</a><?php
 					}
 					else{?>
 						menunggu hari reservasi<?php

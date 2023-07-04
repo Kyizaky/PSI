@@ -1,9 +1,7 @@
 <?php
     session_start();
 	include "conn.php";
-    if( ! $_SESSION['role'] == 2){
-        header("Location: tampilan_login.php");
-    }
+
     $ide = $_SESSION['user_id'];
 	$barang = mysqli_query($kon,"SELECT * FROM users u JOIN customers c on (u.id = c.id_user) WHERE u.id=$ide");
 	$barang = mysqli_fetch_array($barang);
