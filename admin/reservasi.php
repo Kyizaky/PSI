@@ -41,9 +41,9 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="histori_reservasi.php">
 					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text">Analytics</span>
+					<span class="text">Histori Reservasi</span>
 				</a>
 			</li>
 			<li>

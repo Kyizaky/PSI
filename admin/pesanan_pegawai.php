@@ -28,13 +28,13 @@
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
+			<li >
 				<a href="pegawai.php">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li>
+			<li class="active">
 				<a href="pesanan_pegawai.php">
 					<i class='bx bxs-shopping-bag-alt' ></i>
 					<span class="text">Semua pesanan</span>
@@ -95,7 +95,7 @@
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="admin.php">Home</a>
+							<a class="active" href="pesanan_pegawai.php">histori Pesanan</a>
 						</li>
 					</ul>
 				</div>
@@ -147,7 +147,7 @@ if (isset($_GET['id_pesanan'])) {
 	</thead>
 
 	<?php
-	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE id_barber = $id_barber ORDER BY p.tanggal DESC";
+	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON (p.id_service = s.id_service) WHERE id_barber = $id_barber AND p.status = 'selesai'  ORDER BY p.tanggal DESC";
 
 	$hasil=mysqli_query($kon,$sql);
 	$no=0;

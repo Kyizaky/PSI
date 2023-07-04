@@ -167,7 +167,7 @@ if (isset($_GET['id_pesanan'])) {
    <table class="my-3 table table-bordered">
 		<tr class="table-primary">           
 		<th>No</th>
-		<th>Nama</th>
+		<th>Nama Pelanggan</th>
 		<th>Tanggal</th>
 		<th>Waktu</th>
 		<th>Service</th>
@@ -179,7 +179,7 @@ if (isset($_GET['id_pesanan'])) {
 
 	<?php
 
-	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON (p.id_service = s.id_service) WHERE id_barber = $id_barber AND p.status not like 'cancelled'";
+	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON (p.id_service = s.id_service) WHERE id_barber = $id_barber AND NOT p.status = 'cancelled' AND NOT p.status = 'selesai' ORDER BY p.tanggal ";
 
 	$hasil=mysqli_query($kon,$sql);
 	if($hasil){

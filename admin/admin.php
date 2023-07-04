@@ -168,18 +168,11 @@
 					<i class='bx bxs-calendar-check' ></i>
 					<span class="text">
 						<?php  
-						$data_barang = mysqli_query($kon,"SELECT * FROM pesanan");
-						$jumlah_barang = mysqli_num_rows($data_barang);
+						$data_barang = mysqli_query($kon,"SELECT COUNT(id_sales) as 'jumlah' FROM sales");
+						$jumlah_barang = mysqli_fetch_array($data_barang);
 						?>
-						<h3><?php echo $jumlah_barang;  ?></h3>
-						<p>New Order</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-group' ></i>
-					<span class="text">
-						<h3>2834</h3>
-						<p>Visitors</p>
+						<h3><?php echo $jumlah_barang['jumlah'];  ?></h3>
+						<p>Reservasi selesai</p>
 					</span>
 				</li>
 				<li>
@@ -197,101 +190,16 @@
 
 
 			<div class="flex h-full">
-        <!-- Line Chart -->
-        <div class="w-1/2 p-2">
-          <div class="w-full h-full bg-white shadow-xl rounded-xl">
-            <h2 class="text-2xl font-semibold mb-4 px-5 py-3">BBM Terjual Perbulan</h2>
-            <div class="max-h-96">
-              <canvas id="lineChart" class="w-full h-full"></canvas>
-            </div>
-          </div>
-        </div>
-
-		<!-- Pie Chart -->
-        <div class="w-1/2 p-2">
-          <div class="w-full h-full bg-white rounded-xl shadow-xl">
-            <h2 class="py-3 font-semibold text-3xl text-center">BBM Terjual</h2>
-            <div class="w-full h-96 py-5">
-              <canvas class="w-full h-full" id="pieChart"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-	  <div id="barchart-profit" style="height: 370px; width: 100%;"></div>
-	  <div id="pie-service" style="height: 370px; width: 100%;"></div>
+				<div id="barchart-profit" style="height: 370px; width: 45%; display:inline-block"></div>
+				<div id="pie-service" style="height: 370px; width: 45%;display:inline-block"></div>
+			</div>
 		</main>
 		<!-- MAIN -->
 	</section>
 	<!-- CONTENT -->
-	<script>
-    const pieChartCtx = document.getElementById('pieChart').getContext('2d');
-    new Chart(pieChartCtx, {
-      type: 'pie',
-      data: {
-		
-        labels: ['Pertalite', 'Pertamax', 'Pertamax Turbo', 'Pertamina Dex', 'Dextlite', 'Solar',],
-        datasets: [{
-          label: 'Rasio Penjualan',
-          data: [1000, 2500, 1800, 1200, 900, 3000],
-          backgroundColor: ['rgba(0, 123, 255, 0.7)', 'rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)', 'rgba(255, 206, 86, 0.7)', 'rgba(75, 192, 192, 0.7)', 'rgba(153, 102, 255, 0.7)'],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-        legend: {
-          position: 'right'
-        }
-      }
-      }
-    });
-  </script>
-  <script>
-    const ctx = document.getElementById('lineChart').getContext('2d');
-    var gradientStroke1 = ctx.createLinearGradient(0, 230, 0, 50);
-    gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.5)');
-    gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.2)');
-  
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-        datasets: [{
-          label: 'Keuntungan',
-          data: [500, 800, 650, 950, 700, 1200],
-          borderColor: 'rgba(94, 114, 228)',
-          backgroundColor: gradientStroke1,
-          borderWidth: 2,
-          tension: 0.4,
-          fill: true
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            position: 'bottom'
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              stepSize: 100
-            }
-          }
-        }
-      }
-    });
-  </script>
 <script>
 	window.onload = function () {
- 
-	var chart = new CanvasJS.Chart("barchart-profit", {
+	var chart1 = new CanvasJS.Chart("barchart-profit", {
 		animationEnabled: true,
 		theme: "light2", // "light1", "light2", "dark1", "dark2"
 		title: {
@@ -305,20 +213,13 @@
 			dataPoints: <?php echo json_encode($databar, JSON_NUMERIC_CHECK); ?>
 		}]
 	});
-	chart.render();
-}
-</script>
-<script>
-window.onload = function() {
- 
- 
-var chart = new CanvasJS.Chart("pie-service", {
+var chart2 = new CanvasJS.Chart("pie-service", {
 	animationEnabled: true,
 	title: {
-		text: "Usage Share of Desktop Browsers"
+		text: "Persentase Service"
 	},
 	subtitles: [{
-		text: "November 2017"
+		text: "Persentase service yang dipilih"
 	}],
 	data: [{
 		type: "pie",
@@ -327,9 +228,9 @@ var chart = new CanvasJS.Chart("pie-service", {
 		dataPoints: <?php echo json_encode($datapie, JSON_NUMERIC_CHECK); ?>
 	}]
 });
-chart.render();
+chart2.render();
+chart1.render();
 }
 </script>
-	<script src="js/script.js"></script>
 </body>
 </html>

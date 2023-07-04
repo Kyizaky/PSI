@@ -4,11 +4,6 @@
     if( ! $_SESSION == 3){
         header("Location: tampilan_login.php");
     }
-	$ide = $_SESSION['user_id'];
-	$barang = mysqli_query($kon,"SELECT * FROM users u JOIN customers c on (u.id = c.id_user) WHERE u.id=$ide");
-	$barang = mysqli_fetch_array($barang);
-	$id_cust = $barang['id_customer'];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +28,7 @@
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
+			<li>
 				<a href="pelanggan.php">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
@@ -45,7 +40,7 @@
 					<span class="text">Reservasi</span>
 				</a>
 			</li>
-			<li>
+			<li class="active">
 				<a href="histori_reservasi.php">
 					<i class='bx bxs-doughnut-chart' ></i>
 					<span class="text">Histori Reservasi</span>
@@ -111,29 +106,45 @@
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="pelanggan.php">Home</a>
+							<a class="active" href="histori_reservasi.php">Histori reservasi</a>
 						</li>
+                        
 					</ul>
 				</div>
 			</div>
 			<ul class="box-info">
-				<li>
-					<i class='bx bxs-calendar-check' ></i>
-					<span class="text">
-						<?php  
-						$data_pesan = mysqli_query($kon,"SELECT COUNT(id_pesanan) as 'jumlah' FROM pesanan WHERE id_customer = '$id_cust' AND Status = 'reserved'");
-						$jumlah_pesan = mysqli_fetch_array($data_pesan);
-						?>
-						<h3><?php echo $jumlah_pesan['jumlah'];  ?></h3>
-						<p>Reservasi aktif anda</p>
+			<?php
+						$ide = $_SESSION['user_id'];
+					$barang = mysqli_query($kon,"SELECT * FROM users u JOIN customers c on (u.id = c.id_user) WHERE u.id=$ide");
+					$barang = mysqli_fetch_array($barang);
+					$id_cust = $barang['id_customer'];
+							$qrpesan = "select * from pesanan where id_customer = $id_cust ";
+							$sqlpesan = mysqli_query($kon,$qrpesan);
+							if(mysqli_num_rows($sqlpesan)>0){
+								$datapesan = mysqli_fetch_assoc($sqlpesan);
+								
+							}?>
+				<?php 
+				
+				$qrreview = "select * from pesanan where id_customer = $id_cust AND status = 'reserved' ";
+				$sqlreview = mysqli_query($kon,$qrreview);
+				if(mysqli_num_rows($sqlreview)>0){
+					$datablmreview = mysqli_fetch_assoc($sqlreview);
+					echo "<li>
+					<i class='bx bxs-group' ></i>
+					<span class='text'>
+						<h3>Review pengalaman anda</h3>
+						<p>anda punya"; echo mysqli_num_rows($sqlreview)." pesanan yang belum anda review </p>
 					</span>
-				</li>
+				</li>";
+				}
+				?>
 			</ul>
 
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Recent Reservation</h3>
+						<h3>Histori reservasi</h3>
 						<i class='bx bx-search' ></i>
 						<i class='bx bx-filter' ></i>
 					</div>
@@ -170,7 +181,7 @@ if (isset($_GET['id_pesanan'])) {
 
 	<?php
 
-	$sql="SELECT  p.id_pesanan, b.nama as 'nama', p.tanggal as 'tanggal', p.waktu as 'waktu', s.service as 'service', p.Status as 'status' FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) JOIN barber b ON (p.id_barber=b.id_barber) WHERE p.id_customer = $id_cust AND NOT p.Status= 'selesai' ORDER BY p.tanggal limit 5  ";
+	$sql="SELECT b.nama as 'nama', p.tanggal as 'tanggal', p.waktu as 'waktu', s.service as 'service', p.Status as 'status' FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) JOIN barber b ON (p.id_barber=b.id_barber) WHERE p.id_customer = $id_cust AND (p.status = 'selesai' OR p.status = 'cancelled') ORDER BY p.tanggal ";
 
 	$hasil=mysqli_query($kon,$sql);
 	$no=0;
@@ -187,12 +198,7 @@ if (isset($_GET['id_pesanan'])) {
 			<td><?php echo $data["service"];   ?></td>
 			<td><?php echo $data["status"];   ?></td>
             <td>
-			<?php 
-			if ($data['status'] == "reserved" && $data['tanggal'] != date('Y-m-d')){ ?>
-				<a href="cancelPelanggan.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status pending">❌</a>
-            <?php }
-			elseif($data['status'] == "reserved" && $data['tanggal'] == date('Y-m-d')){?>
-				tidak dapat dibatalkan <?php }?>
+			    <a href="detail.php?id_pesanan=<? $data['id_pesanan']; ?>" >detail</a>
             </td>
 		</tr>
 		</tbody>
