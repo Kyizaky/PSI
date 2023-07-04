@@ -1,5 +1,8 @@
 <?php 
 include "conn.php";
+if( ! $_SESSION['role'] == 2){
+	header("Location: tampilan_login.php");
+}
 $id = $_GET["id_pesanan"];
 $quer = "SELECT * FROM pesanan p JOIN sales s ON (p.id_pesanan = s.id_pesanan) JOIN barber b ON (p.id_barber = b.id_barber) where p.id_pesanan=$id";
 $sqli = mysqli_query($kon, $quer);
@@ -29,16 +32,22 @@ $data = mysqli_fetch_assoc($sqli);
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
-				<a href="pegawai.php">
+			<li >
+				<a href="pelanggan.php">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a href="pesanan_pegawai.php">
+				<a href="reservasi.php">
 					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">Semua pesanan</span>
+					<span class="text">Reservasi</span>
+				</a>
+			</li>
+			<li class="active">
+				<a href="histori_reservasi.php">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Histori Reservasi</span>
 				</a>
 			</li>
 		</ul>
@@ -87,7 +96,7 @@ $data = mysqli_fetch_assoc($sqli);
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="pelanggan.php">Home</a>
+							<a class="active" href="histori_reservasi.php">Histori reservasi</a>
 						</li>
 					</ul>
 				</div>

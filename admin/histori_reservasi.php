@@ -1,7 +1,7 @@
 <?php
     session_start();
 	include "conn.php";
-    if( ! $_SESSION == 3){
+    if( ! $_SESSION['role'] == 2){
         header("Location: tampilan_login.php");
     }
     $ide = $_SESSION['user_id'];
@@ -48,18 +48,6 @@
 				<a href="histori_reservasi.php">
 					<i class='bx bxs-doughnut-chart' ></i>
 					<span class="text">Histori Reservasi</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-message-dots' ></i>
-					<span class="text">Message</span>
-				</a>
-			</li>
-			<li>
-				<a href="team.php">
-					<i class='bx bxs-group' ></i>
-					<span class="text">Team</span>
 				</a>
 			</li>
 		</ul>

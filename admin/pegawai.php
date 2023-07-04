@@ -1,7 +1,7 @@
 <?php
     session_start();
 	include "conn.php";
-    if( ! $_SESSION == 2){
+    if( ! $_SESSION['role'] == 2){
         header("Location: tampilan_login.php");
     }
 	$ide = $_SESSION['user_id'];
@@ -99,7 +99,7 @@
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="admin.php">Home</a>
+							<a class="active" href="pegawai.php">Home</a>
 						</li>
 					</ul>
 				</div>
@@ -111,8 +111,8 @@
 					<i class='bx bxs-calendar-check' ></i>
 					<span class="text">
 						<?php  
-						$data_barang = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status !='Completed' AND Status != 'Cancelled'");
-						$done = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status ='Completed'");
+						$data_barang = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status !='selesai' AND Status != 'Cancelled'");
+						$done = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status ='selesai'");
 						$cancel = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status ='Cancelled'");
 						$jumlah_barang = mysqli_num_rows($data_barang);
 						$jumlah_done = mysqli_num_rows($done);

@@ -1,9 +1,13 @@
 <?php
     session_start();
 	include "conn.php";
-    if( ! $_SESSION == 2){
+    if( ! $_SESSION['role'] == 2){
         header("Location: tampilan_login.php");
     }
+	$ide = $_SESSION['user_id'];
+						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
+						$barang = mysqli_fetch_array($barang);
+						$id_barber = $barang['id_barber'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -101,12 +105,7 @@
 				</div>
 				
 			</div>
-					<?php  
-						$ide = $_SESSION['user_id'];
-						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
-						$barang = mysqli_fetch_array($barang);
-						$id_barber = $barang['id_barber'];
-						?>
+
 
 			<div class="table-data">
 				<div class="order">
