@@ -163,7 +163,7 @@ if (isset($_GET['id_pesanan'])) {
 			<td><?php echo $data["waktu"];   ?></td>
 			<td><?php echo $data["service"];   ?></td>
 			<td><?php echo $data["Status"];   ?></td>
-			<td><a href="pembayaran.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status process">✅</a></td>
+			<td><a href="pembayaran.php?id_pesanan=<?= $data['id_pesanan']; ?>" >detail</a></td>
 		</tr>
 		</tbody>
 		<?php

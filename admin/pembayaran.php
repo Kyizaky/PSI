@@ -97,7 +97,7 @@ $data = mysqli_fetch_assoc($sqli);
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="admin.php">Home</a>
+							<a class="active" href="pegawai.php">Home</a>
 						</li>
 					</ul>
 				</div>
@@ -117,9 +117,9 @@ $data = mysqli_fetch_assoc($sqli);
             </div>
             <div class="form-group">
                 <label for="sales">Harga</label>
-                <input type="text" class="form-control" name='sales' id="sales" value=<?php echo $data['harga']?> >
+                <input type="text" class="form-control" name='sales' id="sales" <?php if($data['Status'] == 'selesai'){echo 'disabled' ;} ?> value=<?php echo $data['harga']?> >
             </div>
-            <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" name="submit" id="submit" <?php if($data['Status'] == 'selesai'){echo 'disabled' ;}?> class="btn btn-primary">Submit</button>
             </form>
         </div>
 		</main>

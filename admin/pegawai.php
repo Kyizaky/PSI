@@ -4,6 +4,10 @@
     if( ! $_SESSION == 2){
         header("Location: tampilan_login.php");
     }
+	$ide = $_SESSION['user_id'];
+						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
+						$barang = mysqli_fetch_array($barang);
+						$id_barber = $barang['id_barber'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,10 +111,6 @@
 					<i class='bx bxs-calendar-check' ></i>
 					<span class="text">
 						<?php  
-						$ide = $_SESSION['user_id'];
-						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
-						$barang = mysqli_fetch_array($barang);
-						$id_barber = $barang['id_barber'];
 						$data_barang = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status !='Completed' AND Status != 'Cancelled'");
 						$done = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status ='Completed'");
 						$cancel = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status ='Cancelled'");

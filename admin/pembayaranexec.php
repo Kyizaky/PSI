@@ -18,7 +18,7 @@ $hasil=mysqli_query($kon,$sql);
 if ($hasil) {
     $hasil1=mysqli_query($kon,$sql1);
     if ($hasil1) {
-    header("Location:pegawai.php");}
+    header("Location:pesanan_pegawai.php");}
 }
 else {
     echo "<div class='alert alert-danger'> Data Gagal disimpan.</div>";

@@ -1,7 +1,7 @@
 <?php 
 include "conn.php";
 $id = $_GET["id_pesanan"];
-$quer = "SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON (p.id_service = s.id_service) where p.id_pesanan=$id";
+$quer = "SELECT * FROM pesanan p JOIN sales s ON (p.id_pesanan = s.id_pesanan) JOIN barber b ON (p.id_barber = b.id_barber) where p.id_pesanan=$id";
 $sqli = mysqli_query($kon, $quer);
 $data = mysqli_fetch_assoc($sqli);
 
@@ -65,20 +65,9 @@ $data = mysqli_fetch_assoc($sqli);
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form>
+			
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
-			</a>
 			<a href="#" class="profile">
 				<img src="img/people.jpeg">
 			</a>
@@ -88,6 +77,7 @@ $data = mysqli_fetch_assoc($sqli);
 		<!-- MAIN -->
 		<main>
         <div>
+		<div>
 			<div class="head-title">
 				<div class="left">
 					<h1>Detail Pesanan</h1>
@@ -97,29 +87,27 @@ $data = mysqli_fetch_assoc($sqli);
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="admin.php">Home</a>
+							<a class="active" href="pelanggan.php">Home</a>
 						</li>
 					</ul>
 				</div>
 				
 			</div>
+            
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="tanggal">Tanggal</label>
-                    <input type="text" class="form-control" id="tanggal">
+                    <input type="text" class="form-control" id="tanggal" disabled value=<?php echo $data['tanggal']?>>
+                    <input type="hidden" class="form-control" name='id_pesanan' id="id_pesanan" hidden value=<?php echo $data['id_pesanan']?>>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="pelanggan">pelanggan</label>
-                    <input type="text" class="form-control" id="pelanggan" >
+                    <label for="pelanggan">Barber</label>
+                    <input type="text" class="form-control" id="pelanggan" disabled value=<?php echo $data['nama']?> >
                 </div>
             </div>
             <div class="form-group">
-                <label for="barber">barber</label>
-                <input type="text" class="form-control" id="barber" >
-            </div>
-            <div class="form-group">
-                <label for="sales">Address 2</label>
-                <input type="text" class="form-control" id="sales" >
+                <label for="sales">Harga</label>
+                <input type="text" class="form-control" name='sales' id="sales" disabled value=<?php echo $data['sales']?> >
             </div>
         </div>
 		</main>
