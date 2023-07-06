@@ -1,6 +1,9 @@
 <?php
     session_start();
 	include "conn.php";
+	if($_SESSION['roles']!=3){
+		header("Location:logout.php");
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +15,7 @@
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="css/style.css">
-
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 	<title>BarberSpot</title>
 </head>
 <body>
@@ -21,11 +24,11 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+		<i class='bx bx-cut' ></i>
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="">
+			<li >
 				<a href="pelanggan.php">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
@@ -39,7 +42,7 @@
 			</li>
 			<li>
 				<a href="histori_reservasi.php">
-					<i class='bx bxs-doughnut-chart' ></i>
+				<i class='bx bxs-time'></i>
 					<span class="text">Histori Reservasi</span>
 				</a>
 			</li>
@@ -70,12 +73,9 @@
 			
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
-			</a>
-			<a href="#" class="profile">
-				<img src="img/people.jpeg">
+			
+			<a href="#" class="profile ">
+				<h5>Halo <?php echo $_SESSION['nama']; ?></h5>
 			</a>
 		</nav>
 		<!-- NAVBAR -->
@@ -84,16 +84,12 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1>Reservasi</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a href="pelanggan.php">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
-						<li>
-							<a class="active" href="pelanggan.php">Home</a>
-						</li>
-                        <li><i class='bx bx-chevron-right' ></i></li>
 						<li>
 							<a class="active" href="Reservasi.php">Reservasi</a>
 						</li>
@@ -135,6 +131,11 @@
 
         //Kondisi apakah berhasil atau tidak dalam mengeksekusi query diatas
         if ($hasil) {
+			echo '<script>
+
+  alert("I am an alert box!");
+
+</script>';
             header("Location:pelanggan.php");
         }
         else {
@@ -144,52 +145,84 @@
 
     }
     ?>
-    <h2>Reservasi</h2>
 
 
     <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="post">
-        
-        <div class="form-group">
-            <label>Tanggal:</label>
-            <input type="date"  name="tanggal" class="form-control" required/>
-        </div>
-		<div class="form-group">
-            <label>Barber:</label>
-            <select name="id_barber" id="#" class="form-control">
-            <option>-- Pilih Barber --</option>
-				<?php 
-                    $barb = mysqli_query($kon, "SELECT * FROM barber");
-                    while($databar = mysqli_fetch_array($barb)){ 
-                ?>
-                <option value="<?php echo $databar['id_barber']?>"><?php echo $databar['nama']?></option>
-                <?php } ?>
-			</select>
-    	</div>
-       	<div class="form-group">
-            <label>Jam :</label><br>
-            <input type="Radio" name="waktu" value="08:00" required/> 08:00 | 
-            <input type="Radio" name="waktu" value="10:00" required/> 10:00 | 
-            <input type="Radio" name="waktu" value="13:00" required/> 13:00 |
-			<input type="Radio" name="waktu" value="13:00" required/> 15:00 |
-			<input type="Radio" name="waktu" value="13:00" required/> 17:00 | 
-			<input type="Radio" name="waktu" value="13:00" required/> 19:00 | 
-        </div>
-                </p>
-       
-        <div class="form-group">
-            <label>Service:</label>
-            <select name="id_service" id="#" class="form-control">
-                <option>-- Pilih Service --</option>
-				<?php 
-                    $serv = mysqli_query($kon, "SELECT * FROM service");
-                    while($c = mysqli_fetch_array($serv)){ 
-                ?>
-                <option value="<?php echo $c['id_service']?>"><?php echo $c['service']?></option>
-                <?php } ?>
-			</select>
-        </div>
-        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-    </form>
+    <div id="booking" class="section">
+			<div class="section-center">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-7 col-md-push-5">
+							<div class="booking-cta">
+								<h1>Make your reservation</h1>
+								<p>Silahkan isi Formulir disamping. Reservasi anda akan <br>langsung masuk ke barber kami.								</p>
+							</div>
+						</div>
+						<div class="col-md-4 col-md-pull-7">
+							<div class="booking-form">
+								
+									<div class="form-group">
+										<span class="form-label">Tanggal</span>
+										<input class="form-control" type="date" name="tanggal" id="tanggal" required>
+									</div>
+							
+									<div class="form-group">
+										<label>Jam :</label><br>
+										<input type="Radio" name="waktu" value="08:00" required/> 08:00 | 
+										<input type="Radio" name="waktu" value="10:00" required/> 10:00 | 
+										<input type="Radio" name="waktu" value="13:00" required/> 13:00 |
+										<br>
+										<input type="Radio" name="waktu" value="13:00" required/> 15:00 |
+										<input type="Radio" name="waktu" value="13:00" required/> 17:00 | 
+										<input type="Radio" name="waktu" value="13:00" required/> 19:00 | 
+									</div>
+									
+											
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<span class="form-label">Barberman</span>
+												<select name="id_barber" id="#" class="form-control">
+													<option>-- Pilih Barber --</option>
+														<?php 
+															$barb = mysqli_query($kon, "SELECT * FROM barber");
+															while($databar = mysqli_fetch_array($barb)){ 
+														?>
+														<option value="<?php echo $databar['id_barber']?>"><?php echo $databar['nama']?></option>
+														<?php } ?>
+													</select>
+												<span class="select-arrow"></span>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<span class="form-label">Services</span>
+												<select name="id_service" id="#" class="form-control">
+													<option>-- Pilih Service --</option>
+													<?php 
+														$serv = mysqli_query($kon, "SELECT * FROM service");
+														while($c = mysqli_fetch_array($serv)){ 
+													?>
+													<option value="<?php echo $c['id_service']?>"><?php echo $c['service']?></option>
+													<?php } ?>
+												</select>
+												<span class="select-arrow"></span>
+											</div>
+										</div>
+										
+									</div>
+									<div class="form-btn">
+										<button type="submit" name="submit" class="submit-btn btn-success" >Submit</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+    
 </div>
 			
 
@@ -203,13 +236,7 @@
 
 </div>
 <!-- tengah tengah  -->
-				<div class="todo">
-					<div class="head">
-						
-					</div>
-					
-				</div>
-			</div>
+				
 		</main>
 		<!-- MAIN -->
 	</section>
@@ -217,6 +244,7 @@
 	
 
 	<script src="js/script.js"></script>
+
 </body>
 </html>
 

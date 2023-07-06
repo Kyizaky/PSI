@@ -15,8 +15,11 @@
 
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	<!-- My CSS -->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+
 
 	<title>BarberSpot</title>
 </head>

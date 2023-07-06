@@ -15,8 +15,11 @@
 
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	<!-- My CSS -->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+
 
 	<title>BarberSpot</title>
 </head>
@@ -25,8 +28,8 @@
 
 	<!-- SIDEBAR -->
 	<section id="sidebar">
-		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+	<a href="#" class="brand">
+		<i class='bx bx-cut' ></i>
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
@@ -67,21 +70,11 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form>
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
-			</a>
+			
 			<a href="#" class="profile">
-				<img src="img/people.jpeg">
+				<h5>Halo <?php echo $_SESSION['nama']?></h5>
 			</a>
 		</nav>
 		<!-- NAVBAR -->
@@ -90,7 +83,7 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1>Dashboard Barber</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a href="admin.php">Dashboard</a>

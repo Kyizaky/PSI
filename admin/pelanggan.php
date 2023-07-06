@@ -1,6 +1,9 @@
 <?php
     session_start();
 	include "conn.php";
+	if($_SESSION['roles']!=3){
+		header("Location:logout.php");
+	}
 
 	$ide = $_SESSION['user_id'];
 	$barang = mysqli_query($kon,"SELECT * FROM users u JOIN customers c on (u.id = c.id_user) WHERE u.id=$ide");
@@ -16,8 +19,10 @@
 
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	<!-- My CSS -->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 
 	<title>BarberSpot</title>
 </head>
@@ -27,7 +32,7 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+		<i class='bx bx-cut' ></i>
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
@@ -45,7 +50,7 @@
 			</li>
 			<li>
 				<a href="histori_reservasi.php">
-					<i class='bx bxs-doughnut-chart' ></i>
+				<i class='bx bxs-time'></i>
 					<span class="text">Histori Reservasi</span>
 				</a>
 			</li>
@@ -76,12 +81,9 @@
 			
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
-			</a>
-			<a href="#" class="profile">
-				<img src="img/people.jpeg">
+			
+			<a href="#" class="text-end">
+				<h5 class="text-end">Halo <?php echo $_SESSION['nama']; ?></h5>
 			</a>
 		</nav>
 		<!-- NAVBAR -->
@@ -120,8 +122,7 @@
 				<div class="order">
 					<div class="head">
 						<h3>Recent Reservation</h3>
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
+
 					</div>
 					<?php
 

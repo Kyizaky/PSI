@@ -17,7 +17,7 @@
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="css/style.css">
-
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 	<title>BarberSpot</title>
 </head>
 <body>
@@ -26,11 +26,11 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+		<i class='bx bx-cut' ></i>
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
-			<li>
+			<li >
 				<a href="pelanggan.php">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
@@ -44,7 +44,7 @@
 			</li>
 			<li class="active">
 				<a href="histori_reservasi.php">
-					<i class='bx bxs-doughnut-chart' ></i>
+				<i class='bx bxs-time'></i>
 					<span class="text">Histori Reservasi</span>
 				</a>
 			</li>
@@ -75,12 +75,9 @@
 			
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
-			</a>
-			<a href="#" class="profile">
-				<img src="img/people.jpeg">
+
+			<a href="#" class="profile ">
+				<h5>Halo <?php echo $_SESSION['nama']; ?></h5>
 			</a>
 		</nav>
 		<!-- NAVBAR -->
@@ -89,7 +86,7 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1>Histori Reservasi</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a href="pelanggan.php">Dashboard</a>

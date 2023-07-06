@@ -16,6 +16,7 @@ $data = mysqli_fetch_assoc($sqli);
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 
 	<title>BarberSpot</title>
 </head>
@@ -25,7 +26,7 @@ $data = mysqli_fetch_assoc($sqli);
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+		<i class='bx bx-cut' ></i>
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
@@ -35,15 +36,15 @@ $data = mysqli_fetch_assoc($sqli);
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li>
+			<li class="active">
 				<a href="reservasi.php">
 					<i class='bx bxs-shopping-bag-alt' ></i>
 					<span class="text">Reservasi</span>
 				</a>
 			</li>
-			<li class="active">
+			<li>
 				<a href="histori_reservasi.php">
-					<i class='bx bxs-doughnut-chart' ></i>
+				<i class='bx bxs-time'></i>
 					<span class="text">Histori Reservasi</span>
 				</a>
 			</li>
@@ -74,9 +75,7 @@ $data = mysqli_fetch_assoc($sqli);
 			
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="profile">
-				<img src="img/people.jpeg">
-			</a>
+
 		</nav>
 		<!-- NAVBAR -->
 
@@ -89,7 +88,7 @@ $data = mysqli_fetch_assoc($sqli);
 					<h1>Detail Pesanan</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="admin.php">Dashboard</a>
+							<a href="pelanggan.php">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
@@ -115,6 +114,7 @@ $data = mysqli_fetch_assoc($sqli);
                 <label for="sales">Harga</label>
                 <input type="text" class="form-control" name='sales' id="sales" disabled value=<?php echo $data['sales']?> >
             </div>
+			<a href="histori_reservasi.php"><button class="btn btn-success">Selesai</button></a>
         </div>
 		</main>
 		<!-- MAIN -->
