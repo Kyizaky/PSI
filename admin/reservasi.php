@@ -1,9 +1,6 @@
 <?php
     session_start();
 	include "conn.php";
-    if( !$_SESSION == 3){
-        header("Location: tampilan_login.php");
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,21 +38,9 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="histori_reservasi.php">
 					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text">Analytics</span>
-				</a>
-			</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-message-dots' ></i>
-					<span class="text">Message</span>
-				</a>
-			</li>
-			<li>
-				<a href="team.php">
-					<i class='bx bxs-group' ></i>
-					<span class="text">Team</span>
+					<span class="text">Histori Reservasi</span>
 				</a>
 			</li>
 		</ul>

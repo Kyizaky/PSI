@@ -1,9 +1,11 @@
 <?php
     session_start();
 	include "conn.php";
-    if( ! $_SESSION == 2){
-        header("Location: tampilan_login.php");
-    }
+
+	$ide = $_SESSION['user_id'];
+						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
+						$barang = mysqli_fetch_array($barang);
+						$id_barber = $barang['id_barber'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,13 +30,13 @@
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
+			<li >
 				<a href="pegawai.php">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li>
+			<li class="active">
 				<a href="pesanan_pegawai.php">
 					<i class='bx bxs-shopping-bag-alt' ></i>
 					<span class="text">Semua pesanan</span>
@@ -95,18 +97,13 @@
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="admin.php">Home</a>
+							<a class="active" href="pesanan_pegawai.php">histori Pesanan</a>
 						</li>
 					</ul>
 				</div>
 				
 			</div>
-					<?php  
-						$ide = $_SESSION['user_id'];
-						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
-						$barang = mysqli_fetch_array($barang);
-						$id_barber = $barang['id_barber'];
-						?>
+
 
 			<div class="table-data">
 				<div class="order">
@@ -147,7 +144,7 @@ if (isset($_GET['id_pesanan'])) {
 	</thead>
 
 	<?php
-	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE id_barber = $id_barber ORDER BY p.tanggal DESC";
+	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON (p.id_service = s.id_service) WHERE id_barber = $id_barber AND p.status = 'selesai'  ORDER BY p.tanggal DESC";
 
 	$hasil=mysqli_query($kon,$sql);
 	$no=0;
@@ -163,7 +160,7 @@ if (isset($_GET['id_pesanan'])) {
 			<td><?php echo $data["waktu"];   ?></td>
 			<td><?php echo $data["service"];   ?></td>
 			<td><?php echo $data["Status"];   ?></td>
-			<td><a href="pembayaran.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status process">✅</a></td>
+			<td><a href="pembayaran.php?id_pesanan=<?= $data['id_pesanan']; ?>" >detail</a></td>
 		</tr>
 		</tbody>
 		<?php

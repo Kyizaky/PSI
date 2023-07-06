@@ -1,9 +1,11 @@
 <?php
     session_start();
 	include "conn.php";
-    if( ! $_SESSION == 2){
-        header("Location: tampilan_login.php");
-    }
+    
+	$ide = $_SESSION['user_id'];
+						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
+						$barang = mysqli_fetch_array($barang);
+						$id_barber = $barang['id_barber'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +97,7 @@
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="admin.php">Home</a>
+							<a class="active" href="pegawai.php">Home</a>
 						</li>
 					</ul>
 				</div>
@@ -107,12 +109,8 @@
 					<i class='bx bxs-calendar-check' ></i>
 					<span class="text">
 						<?php  
-						$ide = $_SESSION['user_id'];
-						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
-						$barang = mysqli_fetch_array($barang);
-						$id_barber = $barang['id_barber'];
-						$data_barang = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status !='Completed' AND Status != 'Cancelled'");
-						$done = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status ='Completed'");
+						$data_barang = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status !='selesai' AND Status != 'Cancelled'");
+						$done = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status ='selesai'");
 						$cancel = mysqli_query($kon,"SELECT * FROM pesanan where id_barber='$id_barber' AND Status ='Cancelled'");
 						$jumlah_barang = mysqli_num_rows($data_barang);
 						$jumlah_done = mysqli_num_rows($done);
@@ -167,7 +165,7 @@ if (isset($_GET['id_pesanan'])) {
    <table class="my-3 table table-bordered">
 		<tr class="table-primary">           
 		<th>No</th>
-		<th>Nama</th>
+		<th>Nama Pelanggan</th>
 		<th>Tanggal</th>
 		<th>Waktu</th>
 		<th>Service</th>
@@ -179,7 +177,7 @@ if (isset($_GET['id_pesanan'])) {
 
 	<?php
 
-	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON (p.id_service = s.id_service) WHERE id_barber = $id_barber AND p.status not like 'cancelled'";
+	$sql="SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON (p.id_service = s.id_service) WHERE id_barber = $id_barber AND NOT p.status = 'cancelled' AND NOT p.status = 'selesai' ORDER BY p.tanggal ";
 
 	$hasil=mysqli_query($kon,$sql);
 	if($hasil){
@@ -203,8 +201,8 @@ if (isset($_GET['id_pesanan'])) {
                 <a href="decline.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status pending">❌</a>
                 <?php } 
 				if ($data['Status'] == "reserved"){
-					if($data['tanggal'] == date('Y-m-d')){?>
-						<a href="pembayaran.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status process">✅</a><?php
+					if($data['tanggal']==date("Y-m-d")){?>
+						<a href="pembayaran.php?id_pesanan=<?= $data['id_pesanan']; ?>" class="status process">pembayaran</a><?php
 					}
 					else{?>
 						menunggu hari reservasi<?php
