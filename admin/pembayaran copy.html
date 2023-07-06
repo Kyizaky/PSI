@@ -1,0 +1,162 @@
+<?php 
+include "conn.php";
+$id = $_GET['id_pesanan'];
+$quer = "SELECT * FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) WHERE  p.id_pesanan=$id";
+$sqli = mysqli_query($kon, $quer);
+$data = mysqli_fetch_assoc($sqli);
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="css/style.css">
+		<!-- Bootstrap -->
+		<link type="text/css" rel="stylesheet" href="css/css/bootstrap.min.css" />
+
+		<!-- Custom stlylesheet -->
+		<link type="text/css" rel="stylesheet" href="css/css/style.css" />
+
+	<title>BarberSpot</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">BarberSpot</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="pegawai.php">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="pesanan_pegawai.php">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Semua pesanan</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href="logout.php" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			
+			<form action="#">
+				<div class="form-input">
+					
+					<button><i class='bx bx-' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a >
+			</a>
+			<a href="#" class="profile">
+				<img src="img/people.jpeg">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<form action="pembayaranexec.php" method="post">
+			<div id="booking" class="section">
+				<div class="section-center">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-7 col-md-push-5">
+								<div class="booking-cta">
+									<h1>Pembayaran</h1>
+									<p>Silahkan Selesaikan Transaksi Berikut ini, cek kembali formulir disamping. <br>Pembayaran Akan langsung diproses.								</p>
+								</div>
+							</div>
+							<div class="col-md-4 col-md-pull-7">
+								<div class="booking-form">
+									<form>
+										<div class="form-group">
+											<span class="form-label">Tanggal</span>
+											<input type="text" class="form-control" id="tanggal" disabled value=<?php echo $data['tanggal']?>>
+                    <input type="hidden" class="form-control" name='id_pesanan' id="id_pesanan" hidden value=<?php echo $data['id_pesanan']?>>
+
+										</div>
+								
+										<div class="form-group">
+											<span class="form-label">Pelanggan</span>
+											
+											<input required type="text" class="form-control" id="pelanggan" disabled value=<?php echo $data['nama']?> >
+										</div>
+										<div class="form-group">
+											<span class="form-label">Harga</span>
+											<input required type="text" class="form-control" name='sales' id="sales" value=<?php echo $data['harga']?> >
+										</div>
+										
+										
+											
+										
+										<div class="form-btn">
+											<button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        <div>
+			<div class="head-title">
+				<div class="left">
+					<h1>Detail Pesanan</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="admin.php">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="admin.php">Pembayaran</a>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+        </div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script src="js/script.js"></script>
+</body>
+</html>
