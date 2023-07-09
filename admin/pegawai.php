@@ -1,7 +1,9 @@
 <?php
     session_start();
 	include "conn.php";
-    
+    if($_SESSION['roles']!=2){
+		header("Location:logout.php");
+	}
 	$ide = $_SESSION['user_id'];
 						$barang = mysqli_query($kon,"SELECT * FROM users u JOIN barber b on (u.id = b.id_user) WHERE u.id=$ide");
 						$barang = mysqli_fetch_array($barang);
@@ -41,7 +43,7 @@
 			</li>
 			<li>
 				<a href="pesanan_pegawai.php">
-					<i class='bx bxs-shopping-bag-alt' ></i>
+				<i class='bx bxs-time'></i>
 					<span class="text">Semua pesanan</span>
 				</a>
 			</li>

@@ -29,7 +29,7 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+		<i class='bx bx-cut' ></i>
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
@@ -41,7 +41,7 @@
 			</li>
 			<li class="active">
 				<a href="pesanan_pegawai.php">
-					<i class='bx bxs-shopping-bag-alt' ></i>
+				<i class='bx bxs-time'></i>
 					<span class="text">Semua pesanan</span>
 				</a>
 			</li>
@@ -69,22 +69,12 @@
 	<section id="content">
 		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form>
+			<i class='bx bx-menu' ></i>	
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
-			</a>
+			
 			<a href="#" class="profile">
-				<img src="img/people.jpeg">
+				<h5>Halo <?php echo $_SESSION['nama']?></h5>
 			</a>
 		</nav>
 		<!-- NAVBAR -->
@@ -93,14 +83,14 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1>Semua Pesanan</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="admin.php">Dashboard</a>
+							<a href="pegawai.php">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="pesanan_pegawai.php">histori Pesanan</a>
+							<a class="active" href="pesanan_pegawai.php">Semua Pesanan</a>
 						</li>
 					</ul>
 				</div>
@@ -110,11 +100,6 @@
 
 			<div class="table-data">
 				<div class="order">
-					<div class="head">
-						<h3>Semua Pesanan</h3>
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
 					<?php
 
 

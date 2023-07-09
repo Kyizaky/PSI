@@ -84,8 +84,10 @@
 
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	<!-- My CSS -->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
     <style>
@@ -104,7 +106,7 @@
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+		<i class='bx bx-cut' ></i>
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
@@ -152,19 +154,12 @@
 		<nav>
 			<i class='bx bx-menu' ></i>
 			
-			<form action="#">
-				<div class="form-input">
-					
-					<button><i class='bx bx-' ></i></button>
-				</div>
-			</form>
+
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
 			<a >
 			</a>
-			<a href="#" class="profile">
-				<img src="img/people.jpeg">
-			</a>
+
 		</nav>
 		<!-- NAVBAR -->
 
@@ -172,14 +167,14 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1>Chart Barber</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a href="admin.php">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="admin.php">Home</a>
+							<a class="active" href="chartBarber.php">Chart Barber</a>
 						</li>
 					</ul>
 				</div>

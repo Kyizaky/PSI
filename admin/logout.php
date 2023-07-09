@@ -1,5 +1,5 @@
 <?php
 session_start();
 session_destroy();
-header("Location:tampilan_login.php");
+header("Location:login/login_form.php");
 //now login part completed

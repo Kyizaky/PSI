@@ -1,0 +1,13 @@
+<?php
+date_default_timezone_set("Asia/Jakarta");
+$host="localhost";
+$user="root";
+$password="";
+$db="psi";
+
+$kon = mysqli_connect($host,$user,$password,$db);
+if (!$kon){
+        die("Koneksi Gagal:".mysqli_connect_error());
+        
+}
+?>

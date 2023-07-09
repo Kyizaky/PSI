@@ -139,7 +139,7 @@ if (isset($_GET['id_pesanan'])) {
 
 	<?php
 
-	$sql="SELECT id_pesanan, b.nama as 'nama', p.tanggal as 'tanggal', p.waktu as 'waktu', s.service as 'service', p.Status as 'status' FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) JOIN barber b ON (p.id_barber=b.id_barber) WHERE p.id_customer = $id_cust AND (p.status = 'selesai' OR p.status = 'cancelled') ORDER BY p.tanggal ";
+	$sql="SELECT id_pesanan, b.nama as 'nama', p.tanggal as 'tanggal', p.waktu as 'waktu', s.service as 'service', p.Status as 'status' FROM pesanan p JOIN customers c ON(p.id_customer = c.id_customer) JOIN service s ON(p.id_service = s.id_service) JOIN barber b ON (p.id_barber=b.id_barber) WHERE p.id_customer = $id_cust AND (p.status = 'selesai' OR p.status = 'cancelled') ORDER BY p.tanggal DESC";
 
 	$hasil=mysqli_query($kon,$sql);
 	$no=0;

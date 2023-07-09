@@ -14,8 +14,10 @@ $data = mysqli_fetch_assoc($sqli);
 
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 	<!-- My CSS -->
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 
 	<title>BarberSpot</title>
 </head>
@@ -25,19 +27,19 @@ $data = mysqli_fetch_assoc($sqli);
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
-			<i class='bx bxs-smile'></i>
+		<i class='bx bx-cut' ></i>
 			<span class="text">BarberSpot</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
+			<li>
 				<a href="pegawai.php">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li>
+			<li class="active">
 				<a href="pesanan_pegawai.php">
-					<i class='bx bxs-shopping-bag-alt' ></i>
+				<i class='bx bxs-time'></i>
 					<span class="text">Semua pesanan</span>
 				</a>
 			</li>
@@ -66,22 +68,8 @@ $data = mysqli_fetch_assoc($sqli);
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form>
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
-			</a>
-			<a href="#" class="profile">
-				<img src="img/people.jpeg">
-			</a>
 		</nav>
 		<!-- NAVBAR -->
 
@@ -93,11 +81,11 @@ $data = mysqli_fetch_assoc($sqli);
 					<h1>Detail Pesanan</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a href="admin.php">Dashboard</a>
+							<a href="pegawai.php">Dashboard</a>
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="pegawai.php">Home</a>
+							<a class="active" href="pesanan_pegawai.php">Semua pesanan</a>
 						</li>
 					</ul>
 				</div>
@@ -119,6 +107,7 @@ $data = mysqli_fetch_assoc($sqli);
                 <label for="sales">Harga</label>
                 <input type="text" class="form-control" name='sales' id="sales" <?php if($data['Status'] == 'selesai'){echo 'disabled' ;} ?> value=<?php echo $data['harga']?> >
             </div>
+			
             <button type="submit" name="submit" id="submit" <?php if($data['Status'] == 'selesai'){echo 'disabled' ;}?> class="btn btn-primary">Submit</button>
             </form>
         </div>

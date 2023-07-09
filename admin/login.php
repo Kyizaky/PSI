@@ -13,16 +13,15 @@ if(isset($_REQUEST['email']) && isset($_REQUEST['pass'])){
 		$data=mysqli_fetch_array($qr);
 		
 		if($data['role']==1){
-		$_SESSION['roles']=$data['role'];
-		$_SESSION['user_data']=$data;
-		$_SESSION['nama'] = $data['username'];
-		$_SESSION['user_id'] = $data['id'];
+			$_SESSION['roles']= $data['role'];
+			$_SESSION['user_data']=$data;
+			$_SESSION['nama'] = $data['username'];
+			$_SESSION['user_id'] = $data['id'];
 			header("Location:admin.php");
-				
 		}
 		elseif($data['role']==2){
 			$_SESSION['roles']= $data['role'];
-			$_SESSION['user_data']=$datusera;
+			$_SESSION['user_data']=$data;
 			$_SESSION['nama'] = $data['username'];
 			$_SESSION['user_id'] = $data['id'];
 			header("Location:pegawai.php");
@@ -35,7 +34,6 @@ if(isset($_REQUEST['email']) && isset($_REQUEST['pass'])){
 			$_SESSION['user_id'] = $data['id'];
 			header("Location: pelanggan.php");
 		}
-
 	}
 	else{
 		header("Location:tampilan_login.php?error=Invalid Login Details");		
